@@ -1,38 +1,64 @@
-from machine import Pin, I2C
-import framebuf
-import ssd1306
-from roboeyes import *
+# -----------------------------------------------
+# Buzzer exercise — play a melody!
+#
+# Wiring:
+#   Buzzer VCC  ->  3.3V
+#   Buzzer GND  ->  GND
+#   Buzzer I/O  ->  GPIO 23
+# -----------------------------------------------
+
+from machine import Pin, PWM
 import time
 
-i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400000)
-oled = ssd1306.SSD1306_I2C(128, 64, i2c)
+buzzer = PWM(Pin(23), freq=440, duty=0)
 
-# The display has a yellow strip (top 16px) and a blue zone (bottom 48px).
-# In MONO_VLSB format each page is 8px tall, so y=16 starts at byte 2*128=256.
-# We point RoboEyes at the blue zone only.
-blue_zone = framebuf.FrameBuffer(memoryview(oled.buffer)[256:], 128, 48, framebuf.MONO_VLSB)
+# --- Note frequencies (Hz) ---
+NOTES = {
+    'C4': 262, 'D4': 294, 'E4': 330, 'F4': 349,
+    'G4': 392, 'A4': 440, 'B4': 494,
+    'C5': 523, 'D5': 587, 'E5': 659, 'F5': 698,
+    'G5': 784, 'A5': 880,
+    '_':  0,   # silence / rest
+}
 
-MOODS      = [DEFAULT, HAPPY, TIRED, ANGRY, CURIOUS]
-MOOD_NAMES = ["Default", "Happy :)", "Tired :|", "Angry >:(", "Curious?"]
-mood_index = 0
+def play(note, duration):
+    freq = NOTES[note]
+    if freq == 0:
+        buzzer.duty(0)
+    else:
+        buzzer.freq(freq)
+        buzzer.duty(512)        # 50% duty = loudest
+    time.sleep(duration)
+    buzzer.duty(0)
+    time.sleep(0.05)            # short gap between notes
 
-def on_show(r):
-    # Yellow strip: show current mood name
-    oled.fill_rect(0, 0, 128, 16, 0)
-    oled.text(MOOD_NAMES[mood_index], 0, 4)
-    oled.show()
+# -----------------------------------------------
+# Exercise: change the melody below!
+# Each entry is ('NOTE', duration_in_seconds)
+# Try changing notes or adding your own!
+# -----------------------------------------------
 
-robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
-robo.set_auto_blinker(ON, interval=2, variation=2)
-robo.set_idle_mode(ON, interval=2, variation=3)
+MELODY = [
+    # Twinkle Twinkle Little Star
+    ('C4', 0.4), ('C4', 0.4), ('G4', 0.4), ('G4', 0.4),
+    ('A4', 0.4), ('A4', 0.4), ('G4', 0.8),
+    ('_',  0.2),
+    ('F4', 0.4), ('F4', 0.4), ('E4', 0.4), ('E4', 0.4),
+    ('D4', 0.4), ('D4', 0.4), ('C4', 0.8),
+    ('_',  0.4),
+    ('G4', 0.4), ('G4', 0.4), ('F4', 0.4), ('F4', 0.4),
+    ('E4', 0.4), ('E4', 0.4), ('D4', 0.8),
+    ('_',  0.2),
+    ('G4', 0.4), ('G4', 0.4), ('F4', 0.4), ('F4', 0.4),
+    ('E4', 0.4), ('E4', 0.4), ('D4', 0.8),
+    ('_',  0.4),
+    ('C4', 0.4), ('C4', 0.4), ('G4', 0.4), ('G4', 0.4),
+    ('A4', 0.4), ('A4', 0.4), ('G4', 0.8),
+    ('_',  0.2),
+    ('F4', 0.4), ('F4', 0.4), ('E4', 0.4), ('E4', 0.4),
+    ('D4', 0.4), ('D4', 0.4), ('C4', 0.8),
+]
 
-last_change = time.ticks_ms()
-
-while True:
-    robo.update()
-
-    now = time.ticks_ms()
-    if time.ticks_diff(now, last_change) > 4000:
-        mood_index = (mood_index + 1) % len(MOODS)
-        robo.mood = MOODS[mood_index]
-        last_change = now
+# Play the melody once, then stop
+for note, duration in MELODY:
+    play(note, duration)
