@@ -6,7 +6,7 @@
 | 2 | 0.96" OLED display | GERUIA, 128×64px, SSD1315, I2C (SCL/SDA), yellow+blue | 4 | | | [amazon.com.be](https://www.amazon.com.be/dp/B0CTMKZJ5L) |
 | 3 | Accelerometer ADXL345 | Weewooday, 3-axis, GY-291 breakout, I2C/SPI | 2 | €7.34 | €7.34 | amazon.com.be |
 | 4 | Tactile push button 6×6×4.3mm | Youmile, 4-pin DIP/SMD, momentary | 100 | €5.72 | €5.72 | amazon.com.be |
-| 5 | Buzzer/alarm module 3-pin | Jopto, DC 3.3–5 V, active buzzer | 5 | €7.51 | €7.51 | amazon.com.be |
+| 5 | Buzzer/alarm module 3-pin | Jopto, DC 3.3–5 V, **active-LOW** (HIGH = silent, LOW = buzz) | 5 | €7.51 | €7.51 | amazon.com.be |
 
 > Prices for items 1 and 2 still to be filled in. All items ordered via Amazon.com.be.
 
