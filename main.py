@@ -1,8 +1,11 @@
-import network, socket
+import network, socket, os
 from machine import Pin, I2C
-import framebuf
+import framebuf, time
 import ssd1306
 from roboeyes import *
+
+# --- Build ID (changes on every deploy/reset) ---
+BUILD_ID = ''.join('{:02x}'.format(b) for b in os.urandom(4))
 
 # --- WiFi Access Point ---
 ap = network.WLAN(network.AP_IF)
@@ -10,6 +13,18 @@ ap.active(True)
 ap.config(essid='STEM-Club', password='12345678')
 while not ap.active():
     pass
+
+# --- Buzzer ---
+buzzer = Pin(23, Pin.OUT, value=1)  # HIGH = silent (active-LOW)
+
+def beep(freq=880, duration=0.08):
+    half_us = 500000 // freq
+    cycles  = int(duration * freq)
+    for _ in range(cycles):
+        buzzer.value(0)
+        time.sleep_us(half_us)
+        buzzer.value(1)
+        time.sleep_us(half_us)
 
 # --- OLED Display ---
 i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400000)
@@ -48,6 +63,7 @@ PAGE = (
     '*{box-sizing:border-box}'
     'body{background:#111;color:#eee;font-family:sans-serif;text-align:center;padding:24px}'
     'h1{font-size:28px;margin-bottom:4px}'
+    '.build{font-size:11px;color:#444;margin-bottom:20px;font-family:monospace}'
     'p{color:#888;margin-bottom:24px}'
     'a{display:inline-block;margin:6px;padding:14px 22px;border-radius:12px;'
     'font-size:18px;font-weight:bold;text-decoration:none}'
@@ -57,19 +73,23 @@ PAGE = (
     '.tired{background:#6688aa;color:#fff}'
     '.angry{background:#dd3333;color:#fff}'
     '.curious{background:#33bbaa;color:#111}'
+    '.beep{background:#9b59b6;color:#fff;margin-top:20px}'
     '</style></head><body>'
     '<h1>Robot Eyes</h1>'
+    '<div class="build">build: %%BUILD%%</div>'
     '<p>Mood: <b>%%MOOD%%</b></p>'
     '<a href="/mood/neutral" class="neutral %%N%%">Neutral</a>'
     '<a href="/mood/happy"   class="happy   %%H%%">Happy</a>'
     '<a href="/mood/tired"   class="tired   %%T%%">Tired</a>'
     '<a href="/mood/angry"   class="angry   %%A%%">Angry</a>'
     '<a href="/mood/curious" class="curious %%C%%">Curious</a>'
+    '<br><a href="/beep" class="beep">Beep!</a>'
     '</body></html>'
 )
 
 def send_page(conn, mood):
-    page = PAGE.replace('%%MOOD%%', mood.upper())
+    page = PAGE.replace('%%BUILD%%', BUILD_ID)
+    page = page.replace('%%MOOD%%',  mood.upper())
     page = page.replace('%%N%%', 'active' if mood == 'neutral' else '')
     page = page.replace('%%H%%', 'active' if mood == 'happy'   else '')
     page = page.replace('%%T%%', 'active' if mood == 'tired'   else '')
@@ -77,8 +97,14 @@ def send_page(conn, mood):
     page = page.replace('%%C%%', 'active' if mood == 'curious' else '')
     conn.send(page.encode())
 
+do_beep = False
+
 while True:
     robo.update()
+
+    if do_beep:
+        beep()
+        do_beep = False
 
     try:
         conn, addr = srv.accept()
@@ -88,11 +114,14 @@ while True:
         except:
             req = b''
 
-        for mood in MOODS:
-            if ('/mood/' + mood).encode() in req:
-                current = mood
-                robo.mood = MOODS[mood]
-                break
+        if b'/beep' in req:
+            do_beep = True
+        else:
+            for mood in MOODS:
+                if ('/mood/' + mood).encode() in req:
+                    current = mood
+                    robo.mood = MOODS[mood]
+                    break
 
         send_page(conn, current)
         conn.close()
