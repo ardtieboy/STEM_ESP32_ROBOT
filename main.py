@@ -4,18 +4,22 @@ import framebuf, time
 import ssd1306
 from roboeyes import *
 
-# --- Build ID (changes on every deploy/reset) ---
 BUILD_ID = ''.join('{:02x}'.format(b) for b in os.urandom(4))
 
-# --- WiFi Access Point ---
+# -----------------------------------------------
+# EXERCISE 1: Give your robot a WiFi name!
+# Replace the text between the quotes below.
+# -----------------------------------------------
+WIFI_NAME = 'STEM-Club'    # <-- change this!
+
 ap = network.WLAN(network.AP_IF)
 ap.active(True)
-ap.config(essid='STEM-Club', password='12345678')
+ap.config(essid=WIFI_NAME, password='12345678')
 while not ap.active():
     pass
 
 # --- Buzzer ---
-buzzer = Pin(23, Pin.OUT, value=1)  # HIGH = silent (active-LOW)
+buzzer = Pin(23, Pin.OUT, value=1)
 
 NOTES = {
     'C4':262,'D4':294,'E4':330,'F4':349,'G4':392,'A4':440,'B4':494,
@@ -40,15 +44,6 @@ def beep(freq=880, duration=0.08):
     _play_note(freq, duration)
 
 MELODY = [
-    # Twinkle Twinkle Little Star
-    ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
-    ('_', .1),
-    ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.5),
-    ('_', .1),
-    ('G4',.3),('G4',.3),('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.5),
-    ('_', .1),
-    ('G4',.3),('G4',.3),('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.5),
-    ('_', .1),
     ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
     ('_', .1),
     ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.6),
@@ -59,16 +54,23 @@ def play_song():
         _play_note(NOTES[note], dur)
     buzzer.value(1)
 
-# --- OLED Display ---
+# --- OLED ---
 i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400000)
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 blue_zone = framebuf.FrameBuffer(memoryview(oled.buffer)[256:], 128, 48, framebuf.MONO_VLSB)
 
+# -----------------------------------------------
+# EXERCISE 2: Add the missing moods!
+# The dictionary maps a name to an emotion.
+# Fill in the two missing ones (marked XXX).
+#
+# Available emotions: DEFAULT HAPPY TIRED ANGRY CURIOUS
+# -----------------------------------------------
 MOODS = {
     'neutral': DEFAULT,
-    'happy':   HAPPY,
+    'happy':   XXX,        # <-- fill in the emotion
     'tired':   TIRED,
-    'angry':   ANGRY,
+    'angry':   XXX,        # <-- fill in the emotion
     'curious': CURIOUS,
 }
 current = 'neutral'
@@ -81,7 +83,7 @@ robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 robo.set_auto_blinker(ON, interval=2, variation=2)
 robo.set_idle_mode(ON, interval=2, variation=3)
 
-# --- Web server (non-blocking so eyes keep animating) ---
+# --- Web server ---
 srv = socket.socket()
 srv.bind(('', 80))
 srv.listen(3)
