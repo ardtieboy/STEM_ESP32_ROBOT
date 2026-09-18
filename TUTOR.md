@@ -4,6 +4,27 @@ This guide gives you everything you need to support students, troubleshoot probl
 
 ---
 
+## What students experience at the start
+
+When students sit down and plug in their board, the OLED screen shows:
+
+```
+Hello,
+[their name]!
+
+STEM Club
+```
+
+This is the `main` branch — pre-flashed before the workshop. Use this moment to explain:
+- They are looking at **MicroPython** code that is already running on the board
+- MicroPython is Python that runs on tiny computers instead of a laptop
+- The board is fully set up — they do not need to install anything
+- Today they will change the code themselves, step by step
+
+Then walk them through opening Thonny and switching to `robo_eyes_exercise`.
+
+---
+
 ## Overview
 
 Students receive a pre-wired ESP32 board and work through three coding exercises in Python. The workshop is structured so that each exercise has a ready-made solution branch — students who fall behind can switch to it and keep up with the group.
@@ -18,6 +39,40 @@ Students receive a pre-wired ESP32 board and work through three coding exercises
 ---
 
 ## Before the workshop
+
+### 0. Install Thonny on all student computers
+
+Students use **Thonny** to edit and upload code — no terminal needed.
+
+On Linux:
+```bash
+pip install thonny
+```
+Or via the package manager:
+```bash
+sudo apt install thonny        # Debian/Ubuntu
+sudo dnf install thonny        # Fedora
+```
+
+Verify it launches and can detect a connected ESP32:
+1. Open Thonny
+2. Bottom-right corner → click the interpreter → **MicroPython (ESP32)**
+3. Select the correct port (e.g. `/dev/ttyUSB0` on Linux)
+4. The bottom panel should show `>>>`
+
+> On Linux, students may need to be added to the `dialout` group to access the serial port:
+> ```bash
+> sudo usermod -aG dialout $USER
+> ```
+> A logout/login is required for this to take effect. Do this before the workshop.
+
+### Thonny workflow for students (summarised)
+
+1. **View → Files** to show the file panel
+2. Bottom panel = ESP32 files → double-click **main.py** to open it
+3. Edit the code
+4. **Ctrl + S** to save to the board
+5. **Stop/Restart** button (or F5) to run
 
 ### 1. Flash all boards
 
