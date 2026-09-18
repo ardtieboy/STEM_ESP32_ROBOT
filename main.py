@@ -21,9 +21,12 @@ robo.set_auto_blinker(ON, interval=2, variation=2)
 robo.set_idle_mode(ON, interval=2, variation=3)
 
 # --- Set up the buttons ---
-# Pressing a button closes the circuit to GND — the signal drops to 0.
+# Buttons are wired to GND. Pull-up keeps the pin at 1 when idle.
+# Pressing closes the circuit to GND → signal becomes 0.
 button1 = Pin(16, Pin.IN, Pin.PULL_UP)   # left button
 button2 = Pin(17, Pin.IN, Pin.PULL_UP)   # right button
+
+PRESSED = 0   # buttons are wired to GND → pressed = 0
 
 # Available emotions: DEFAULT  HAPPY  TIRED  ANGRY  CURIOUS
 EMOTION_1 = HAPPY    # left button  (IO16)
@@ -33,8 +36,8 @@ EMOTION_2 = ANGRY    # right button (IO17)
 while True:
     robo.update()
 
-    if button1.value() == 0:
+    if button1.value() == PRESSED:
         robo.mood = EMOTION_1
 
-    if button2.value() == 0:
+    if button2.value() == PRESSED:
         robo.mood = EMOTION_2
