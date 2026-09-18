@@ -171,24 +171,21 @@ c  d  e  f  g  a          ← one octave higher (lowercase)
 _                          ← silence / pause
 ```
 
-### Finding your melody
+### Task 1 — Choose your beep note
 
-Go to **[noobnotes.net](https://noobnotes.net)** and search for your favourite song. The site shows you the letter names of the notes.
-
-Copy the letters directly — just wrap each one in quotes: `C` → `'C'`. Use lowercase for the higher notes: `c d e f g a`.
-
-### Your task
-
-Switch to the `musical_buzzer_exercise` branch, then open **main.py** from the ESP32. Find this section:
+Find this line and change `'A'` to any note you like:
 
 ```python
-MY_MELODY = [
-    # Write your notes here! ↓
-    ('C', 0.3),
-]
+BEEP_NOTE = 'A'   # <-- change this!
 ```
 
-Replace the example with your own notes. Each entry is `('NOTE', duration)`:
+Save, restart, press **button 1** to hear your beep.
+
+### Task 2 — Guess the mystery song, then write your own
+
+Press **button 2**. A song plays — can you guess what it is?
+
+Once you've heard it, replace `MY_MELODY` with your own song. Go to **[noobnotes.net](https://noobnotes.net)**, find a song, and copy the letters:
 
 ```python
 MY_MELODY = [
@@ -201,7 +198,21 @@ MY_MELODY = [
 
 Durations: `0.2` = short · `0.4` = medium · `0.6` = long
 
-Save and restart. Press button 2 to hear your song!
+### Task 3 — Wire up the buttons
+
+The buttons do nothing yet! Find the `while True:` loop at the bottom. Replace `pass` with the right function call — `beep()` or `play_melody()`:
+
+```python
+while True:
+    if button1.value() == 0:
+        pass           # <-- call beep() or play_melody()
+        time.sleep(0.2)
+    if button2.value() == 0:
+        pass           # <-- call beep() or play_melody()
+        time.sleep(0.5)
+```
+
+Save and restart. Do both buttons work?
 
 ### Stuck?
 
