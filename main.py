@@ -5,12 +5,6 @@ buzzer  = Pin(23, Pin.OUT, value=1)  # HIGH = silent (active-LOW)
 button1 = Pin(16, Pin.IN, Pin.PULL_UP)
 button2 = Pin(17, Pin.IN, Pin.PULL_UP)
 
-# -----------------------------------------------
-# Note → frequency table
-# Each note has a number called its frequency (Hz).
-# A higher number = a higher pitch.
-# Uppercase = normal octave, lowercase = one octave higher.
-# -----------------------------------------------
 NOTES = {
     'C': 262, 'D': 294, 'E': 330, 'F': 349,
     'G': 392, 'A': 440, 'B': 494,
@@ -34,22 +28,29 @@ def play(note, duration):
             time.sleep_us(half_us)
     time.sleep_us(30000)
 
-def beep():
-    play('A', 0.1)
+# ==============================================
+# Task 1 — Choose your beep note
+#
+# Pick any note: C D E F G A B
+# Lowercase = one octave higher: c d e f g a
+# ==============================================
+BEEP_NOTE = 'A'   # <-- change this!
 
-# -----------------------------------------------
-# EXERCISE: Compose your own melody!
+def beep():
+    play(BEEP_NOTE, 0.1)
+
+# ==============================================
+# Task 2 — The mystery song
 #
-# 1. Go to noobnotes.net and find your favourite song
-# 2. Copy the letters — just wrap each in quotes: C → 'C'
-#    Use lowercase for higher notes: c d e f g a
-# 3. Add each note as ('NOTE', duration):
-#      0.2 = short   0.4 = medium   0.6 = long
+# Press button 2 to hear it. Can you guess what it is?
 #
-# Examples:
-#   ('C', 0.3)   plays a C for 0.3 seconds
-#   ('_', 0.2)   is a short pause
-# -----------------------------------------------
+# Once you know, replace MY_MELODY with your own song!
+# Go to noobnotes.net, find a song, and write the notes here.
+#
+#   ('C', 0.3)  ->  play a C for 0.3 seconds
+#   ('_', 0.2)  ->  silence / pause
+#   Durations:  0.2 = short   0.4 = medium   0.6 = long
+# ==============================================
 MY_MELODY = [
     ('A',.3),('B',.2),('c',.5),('G',.3),('G',.3),('d',.6),
     ('_',.15),
@@ -72,10 +73,16 @@ def play_melody():
         play(note, duration)
     buzzer.value(1)
 
+# ==============================================
+# Task 3 — Wire up the buttons
+#
+# Each button should call either beep() or play_melody().
+# Right now they do nothing — replace pass with a function call!
+# ==============================================
 while True:
-    if button1.value() == 0:    # left button  → beep
-        beep()
+    if button1.value() == 0:
+        pass           # <-- call beep() or play_melody()
         time.sleep(0.2)
-    if button2.value() == 0:    # right button → your melody
-        play_melody()
+    if button2.value() == 0:
+        pass           # <-- call beep() or play_melody()
         time.sleep(0.5)
