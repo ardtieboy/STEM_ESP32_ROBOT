@@ -156,16 +156,17 @@ while True:
 
         if b'/beep' in req:
             do_beep = True
+            conn.send(b'HTTP/1.0 302 Found\r\nLocation: /\r\n\r\n')
         elif b'/song' in req:
             do_song = True
+            conn.send(b'HTTP/1.0 302 Found\r\nLocation: /\r\n\r\n')
         else:
             for mood in MOODS:
                 if ('/mood/' + mood).encode() in req:
                     current = mood
                     robo.mood = MOODS[mood]
                     break
-
-        send_page(conn, current)
+            send_page(conn, current)
         conn.close()
     except OSError:
         pass
