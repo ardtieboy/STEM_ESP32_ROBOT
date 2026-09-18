@@ -120,6 +120,61 @@ Connect your own board to a screen and run through each exercise quickly. The OL
 
 ---
 
+## Workshop flow — when to switch branches
+
+At the start of each exercise, students need the right code on their board. Walk around the room and run the two commands below on each computer, or show students how to do it themselves in the terminal.
+
+### Opening — Hello World (already on the board)
+
+Students sit down and see the welcome screen. No action needed — this is already flashed from setup.
+
+Introduce MicroPython, explain the hardware, then move on.
+
+### Before Exercise 1 — Robot Eyes
+
+```bash
+git checkout robo_eyes_exercise
+```
+
+Then in **Thonny**: open `main.py` from **This computer** (top file panel), then **File → Save as → MicroPython device → main.py** to push it to the board.
+
+Or with mpremote (faster if you are going around many computers):
+```bash
+mpremote connect /dev/ttyUSB0 cp main.py :main.py + reset
+```
+
+### Before Exercise 2 — Musical Buzzer
+
+```bash
+git checkout musical_buzzer_exercise
+```
+
+Push `main.py` to the board the same way.
+
+### Before Exercise 3 — WiFi Robot
+
+```bash
+git checkout wifi_robot_exercise
+```
+
+Push `main.py` to the board. Remind students the library files (`ssd1306.py`, `roboeyes.py`, `fbutil.py`) are already on the board from setup — only `main.py` needs updating between exercises.
+
+### Skipping a student to the solution
+
+If a student is stuck and the group is moving on:
+
+```bash
+git checkout robo_eyes_solution      # or musical_buzzer_solution / wifi_robot_solution
+```
+
+Push `main.py`, then switch back to the exercise branch for the next student you help:
+
+```bash
+git checkout robo_eyes_exercise
+```
+
+---
+
 ## Hardware reference
 
 ### Wiring (pre-soldered on every board)
