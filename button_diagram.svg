@@ -1,0 +1,124 @@
+<svg viewBox="0 0 480 345" xmlns="http://www.w3.org/2000/svg"
+     font-family="system-ui, -apple-system, sans-serif" font-size="13">
+
+  <!-- background -->
+  <rect width="480" height="345" fill="#ffffff" rx="10"/>
+
+  <!-- divider -->
+  <line x1="240" y1="20" x2="240" y2="325" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- ── OPTION A (left, cx=120) ─────────────────── -->
+  <text x="120" y="22" text-anchor="middle" font-weight="700" font-size="15" fill="#b91c1c">Option A</text>
+  <text x="120" y="38" text-anchor="middle" font-size="12" fill="#64748b">other leg → 3.3V</text>
+
+  <!-- power rail -->
+  <line x1="82" y1="54" x2="158" y2="54" stroke="#ef4444" stroke-width="3"/>
+  <text x="120" y="50" text-anchor="middle" font-size="11" fill="#ef4444" font-weight="700">3.3V</text>
+
+  <!-- wire from rail to top terminal -->
+  <line x1="120" y1="54" x2="120" y2="85" stroke="#ef4444" stroke-width="2.5"/>
+
+  <!-- button cap -->
+  <rect x="104" y="58" width="32" height="20" rx="5"
+        fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="120" y="72" text-anchor="middle" font-size="10" fill="#334155" font-weight="600">PUSH</text>
+  <!-- actuator rod -->
+  <line x1="120" y1="78" x2="120" y2="87" stroke="#64748b" stroke-width="2"/>
+
+  <!-- top terminal -->
+  <circle cx="120" cy="89" r="5" fill="#475569"/>
+  <!-- open contact (diagonal showing open/disconnected) -->
+  <line x1="120" y1="89" x2="143" y2="115" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- bottom terminal -->
+  <circle cx="120" cy="120" r="5" fill="#475569"/>
+
+  <!-- wire from bottom to PIN -->
+  <line x1="120" y1="125" x2="120" y2="190" stroke="#8b5cf6" stroke-width="2.5"/>
+
+  <!-- PIN box -->
+  <rect x="88" y="190" width="64" height="27" rx="6"
+        fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="120" y="208" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="13">PIN</text>
+
+  <!-- ESP32 label -->
+  <text x="120" y="233" text-anchor="middle" font-size="10" fill="#94a3b8">ESP32</text>
+
+  <!-- state labels -->
+  <text x="62" y="268" font-size="12.5" fill="#475569">Not pressed:</text>
+  <circle cx="162" cy="262" r="14" fill="#3b82f6"/>
+  <text x="162" y="267" text-anchor="middle" font-weight="800" font-size="15" fill="white">0</text>
+
+  <text x="62" y="300" font-size="12.5" fill="#475569">Pressed:</text>
+  <circle cx="148" cy="294" r="14" fill="#ef4444"/>
+  <text x="148" y="299" text-anchor="middle" font-weight="800" font-size="15" fill="white">1</text>
+
+
+  <!-- ── OPTION B (right, cx=360) — OUR BOARD ───── -->
+  <text x="360" y="22" text-anchor="middle" font-weight="700" font-size="15" fill="#15803d">Option B</text>
+  <text x="360" y="38" text-anchor="middle" font-size="12" fill="#15803d" font-weight="600">other leg → GND  ← our board</text>
+
+  <!-- power rail -->
+  <line x1="318" y1="54" x2="402" y2="54" stroke="#ef4444" stroke-width="3"/>
+  <text x="360" y="50" text-anchor="middle" font-size="11" fill="#ef4444" font-weight="700">3.3V</text>
+
+  <!-- wire: power to resistor -->
+  <line x1="360" y1="54" x2="360" y2="72" stroke="#ef4444" stroke-width="2.5"/>
+
+  <!-- pull-up resistor (European style rectangle) -->
+  <rect x="349" y="72" width="22" height="40" rx="3"
+        fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <!-- resistor internal lines to suggest it's a resistor -->
+  <line x1="355" y1="80" x2="365" y2="80" stroke="#d97706" stroke-width="1"/>
+  <line x1="355" y1="86" x2="365" y2="86" stroke="#d97706" stroke-width="1"/>
+  <line x1="355" y1="92" x2="365" y2="92" stroke="#d97706" stroke-width="1"/>
+  <!-- label -->
+  <text x="378" y="87" font-size="10" fill="#92400e">pull-up</text>
+  <text x="378" y="99" font-size="10" fill="#92400e">resistor</text>
+
+  <!-- wire: resistor to PIN junction -->
+  <line x1="360" y1="112" x2="360" y2="133" stroke="#8b5cf6" stroke-width="2.5"/>
+
+  <!-- PIN junction dot -->
+  <circle cx="360" cy="135" r="6" fill="#8b5cf6"/>
+
+  <!-- PIN label box -->
+  <rect x="374" y="124" width="44" height="22" rx="5"
+        fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="396" y="139" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="12">PIN</text>
+  <line x1="366" y1="135" x2="374" y2="135" stroke="#3b82f6" stroke-width="1.5"/>
+
+  <!-- wire: junction to button top terminal -->
+  <line x1="360" y1="141" x2="360" y2="163" stroke="#8b5cf6" stroke-width="2.5"/>
+
+  <!-- button cap -->
+  <rect x="344" y="141" width="32" height="20" rx="5"
+        fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="360" y="155" text-anchor="middle" font-size="10" fill="#334155" font-weight="600">PUSH</text>
+  <line x1="360" y1="161" x2="360" y2="165" stroke="#64748b" stroke-width="2"/>
+
+  <!-- top terminal -->
+  <circle cx="360" cy="167" r="5" fill="#475569"/>
+  <!-- open contact (diagonal) -->
+  <line x1="360" y1="167" x2="383" y2="193" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- bottom terminal -->
+  <circle cx="360" cy="198" r="5" fill="#475569"/>
+
+  <!-- wire: button bottom to GND -->
+  <line x1="360" y1="203" x2="360" y2="228" stroke="#1d4ed8" stroke-width="2.5"/>
+
+  <!-- GND symbol (three descending horizontal lines) -->
+  <line x1="335" y1="228" x2="385" y2="228" stroke="#1d4ed8" stroke-width="3"/>
+  <line x1="342" y1="237" x2="378" y2="237" stroke="#1d4ed8" stroke-width="2.5"/>
+  <line x1="351" y1="246" x2="369" y2="246" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="360" y="262" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="600">GND</text>
+
+  <!-- state labels -->
+  <text x="302" y="290" font-size="12.5" fill="#475569">Not pressed:</text>
+  <circle cx="402" cy="284" r="14" fill="#ef4444"/>
+  <text x="402" y="289" text-anchor="middle" font-weight="800" font-size="15" fill="white">1</text>
+
+  <text x="302" y="322" font-size="12.5" fill="#475569">Pressed:</text>
+  <circle cx="390" cy="316" r="14" fill="#3b82f6"/>
+  <text x="390" y="321" text-anchor="middle" font-weight="800" font-size="15" fill="white">0</text>
+
+</svg>
