@@ -67,6 +67,35 @@ That's it — no terminal commands needed!
 
 Animated robot eyes on the OLED screen. Press a button and the eyes change emotion.
 
+### Walk through the code
+
+Open **main.py** from the ESP32 in Thonny and read through it from top to bottom. Here is what each section does:
+
+**1. Imports** — load the libraries that give us the screen and eye animation.
+
+**2. Screen setup** — connect to the display over two wires (SDA and SCL) and set up the drawing area.
+
+**3. Robot eyes setup** — create the animation and tell it to blink automatically.
+
+**4. Buttons** — this is important to understand:
+
+```python
+button1 = Pin(16, Pin.IN, Pin.PULL_UP)
+```
+
+Each button has one leg connected to a pin on the ESP32 and the other leg to **GND** (ground — 0 volts). Inside the ESP32, a tiny resistor keeps the pin at a **HIGH signal (1)** when the button is not pressed.
+
+When you **press** the button, you close the gate to GND. The signal drops to **0**.
+
+That is why the code checks:
+```python
+if button1.value() == 0:   # 0 = pressed
+```
+
+**5. Your turn** — the only part you need to change (see below).
+
+**6. Main loop** — runs forever, drawing the next animation frame and checking the buttons every time.
+
 ### Available emotions
 
 | Name | What it looks like |
@@ -79,23 +108,21 @@ Animated robot eyes on the OLED screen. Press a button and the eyes change emoti
 
 ### Your task
 
-In Thonny, switch to the `robo_eyes_exercise` branch (your tutor will show you), then open **main.py** from the ESP32.
-
-Find these two lines:
+Find the two lines marked **YOUR TURN**:
 
 ```python
-EMOTION_1 = DEFAULT    # button 1 — left button
-EMOTION_2 = DEFAULT    # button 2 — right button
+EMOTION_1 = DEFAULT    # left button  (IO16)
+EMOTION_2 = DEFAULT    # right button (IO17)
 ```
 
-Replace `DEFAULT` with the emotion you want for each button. For example:
+Replace `DEFAULT` with the emotion you want for each button:
 
 ```python
 EMOTION_1 = HAPPY
 EMOTION_2 = ANGRY
 ```
 
-Save (Ctrl + S) and restart. Press the buttons and watch the eyes!
+Save (**Ctrl + S**) and restart. Press the buttons and watch the eyes change!
 
 ### Stuck?
 
