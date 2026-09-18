@@ -60,11 +60,11 @@ Verify it launches and can detect a connected ESP32:
 3. Select the correct port (e.g. `/dev/ttyUSB0` on Linux)
 4. The bottom panel should show `>>>`
 
-> On Linux, students may need to be added to the `dialout` group to access the serial port:
+> ⚠️ **Do this before the workshop on every Linux computer:** add each user to the `dialout` group, otherwise Thonny cannot access the serial port and students will get a permission error when connecting.
 > ```bash
 > sudo usermod -aG dialout $USER
 > ```
-> A logout/login is required for this to take effect. Do this before the workshop.
+> A logout/login is required for this to take effect.
 
 ### Thonny workflow for students (summarised)
 
