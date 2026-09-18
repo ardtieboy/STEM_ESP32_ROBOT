@@ -31,28 +31,20 @@ def play(note, duration):
 def beep():
     play('A', 0.1)
 
-# Let It Go — Frozen
 MY_MELODY = [
-    # "Let it go, let it go"
     ('A',.3),('B',.2),('c',.5),('G',.3),('G',.3),('d',.6),
     ('_',.15),
-    # "Can't hold it back anymore"
     ('c',.5),('A',.2),('A',.2),('A',.3),('A',.15),('B',.15),('c',.5),
     ('_',.2),
-    # "Let it go, let it go"
     ('A',.3),('B',.2),('c',.5),('G',.3),('e',.3),('e',.15),('d',.6),
     ('_',.15),
-    # "Turn away and slam the door"
     ('c',.3),('d',.15),('e',.35),('e',.3),('f',.15),('e',.15),('d',.2),('c',.15),('d',.2),('c',.5),
     ('_',.3),
-    # "I don't care what they're going to say"
     ('g',.3),('e',.3),('d',.4),
     ('c',.3),('c',.3),('g',.2),('e',.2),('c',.5),
     ('_',.2),
-    # "Let the storm rage on"
     ('c',.3),('c',.3),('B',.3),('G',.3),('G',.5),
     ('_',.2),
-    # "The cold never bothered me anyway"
     ('F',.2),('F',.2),('F',.15),('E',.15),('F',.15),('E',.15),('F',.3),('F',.15),('E',.15),('C',.5),
 ]
 
