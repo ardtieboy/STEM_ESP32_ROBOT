@@ -75,7 +75,6 @@ current = 'neutral'
 
 def on_show(r):
     oled.fill_rect(0, 0, 128, 16, 0)
-    oled.text(current.upper(), 0, 4)
     oled.show()
 
 robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
