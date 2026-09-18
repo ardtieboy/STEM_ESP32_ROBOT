@@ -77,50 +77,63 @@ Open **main.py** from the ESP32 in Thonny and read through it from top to bottom
 
 **3. Robot eyes setup** — create the animation and tell it to blink automatically.
 
-**4. Buttons** — this is important to understand:
+**4. Buttons** — read this carefully, because you will need to figure something out!
 
-```python
-button1 = Pin(16, Pin.IN, Pin.PULL_UP)
-```
-
-Each button has one leg connected to a pin on the ESP32 and the other leg to **GND** (ground — 0 volts). Inside the ESP32, a tiny resistor keeps the pin at a **HIGH signal (1)** when the button is not pressed.
-
-When you **press** the button, you close the gate to GND. The signal drops to **0**.
-
-That is why the code checks:
-```python
-if button1.value() == 0:   # 0 = pressed
-```
-
-**5. Your turn** — the only part you need to change (see below).
+**5. Your turn** — two things to fill in (see below).
 
 **6. Main loop** — runs forever, drawing the next animation frame and checking the buttons every time.
 
-### Available emotions
+---
 
-| Name | What it looks like |
-|------|--------------------|
-| `DEFAULT` | Neutral — calm eyes |
-| `HAPPY` | Big, round friendly eyes |
-| `TIRED` | Droopy eyelids |
-| `ANGRY` | Frowning, narrowed eyes |
-| `CURIOUS` | One eye bigger than the other |
+### How does a button work?
 
-### Your task
+Every pin on the ESP32 reads a **digital signal** — a value that is always either:
 
-Find the two lines marked **YOUR TURN**:
+- **1** (HIGH) — the pin has voltage (~3.3 V)
+- **0** (LOW) — the pin has no voltage (0 V, same as GND)
+
+A button is a simple switch. It connects two points together when pressed.
+Where you connect the other leg of the button decides what signal you read:
+
+| Other leg connected to | Not pressed | Pressed |
+|------------------------|-------------|---------|
+| VCC (3.3 V) | 0 | **1** |
+| GND (0 V) | 1 | **0** |
+
+Our buttons have one leg on the pin and the other leg on **GND**. The ESP32 also has a built-in pull-up resistor that holds the pin at **1** when the button is open.
+
+**Question:** when our button is pressed, does `button.value()` return `0` or `1`?
+
+---
+
+### Your task — part 1: figure out the pressed value
+
+Find this line in the code:
+
+```python
+PRESSED = None   # <-- change None to 0 or 1
+```
+
+Fill in the correct value based on the wiring above. The buttons won't respond until you get this right!
+
+### Your task — part 2: choose your emotions
 
 ```python
 EMOTION_1 = DEFAULT    # left button  (IO16)
 EMOTION_2 = DEFAULT    # right button (IO17)
 ```
 
-Replace `DEFAULT` with the emotion you want for each button:
+Replace `DEFAULT` with the emotion you want for each button.
 
-```python
-EMOTION_1 = HAPPY
-EMOTION_2 = ANGRY
-```
+### Available emotions
+
+| Name | What it looks like |
+|------|--------------------|
+| `DEFAULT` | Calm, neutral eyes |
+| `HAPPY` | Big, round friendly eyes |
+| `TIRED` | Droopy eyelids |
+| `ANGRY` | Frowning, narrowed eyes |
+| `CURIOUS` | One eye bigger than the other |
 
 Save (**Ctrl + S**) and restart. Press the buttons and watch the eyes change!
 
