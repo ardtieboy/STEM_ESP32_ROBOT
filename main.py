@@ -26,18 +26,27 @@ robo.set_auto_blinker(ON, interval=2, variation=2)
 robo.set_idle_mode(ON, interval=2, variation=3)
 
 # --- Set up the buttons ---
-# Each button has one leg connected to a pin and the other leg to GND (ground).
-# When the button is NOT pressed, the pin is held at a HIGH signal (1)
-# by a built-in pull-up resistor inside the ESP32.
-# When you PRESS the button, you close the gate to GND — the signal drops to 0.
-# So: button.value() == 0 means the button is being pressed.
+# A digital signal is always either 1 (HIGH) or 0 (LOW).
+# Where you connect the other leg of the button decides what value you read:
+#   - other leg to VCC (3.3V) → pressing gives 1
+#   - other leg to GND (0V)   → pressing gives 0
+# Our buttons are wired to GND, and a pull-up resistor keeps the pin at 1 when idle.
 button1 = Pin(16, Pin.IN, Pin.PULL_UP)   # left button
 button2 = Pin(17, Pin.IN, Pin.PULL_UP)   # right button
 
 # ==============================================
-# YOUR TURN: Choose an emotion for each button!
+# YOUR TURN — part 1
 #
-# Replace DEFAULT with one of these:
+# When our button is pressed, what signal do we get — 0 or 1?
+# Think about the wiring above, then fill in the answer.
+# ==============================================
+
+PRESSED = None   # <-- change None to 0 or 1
+
+# ==============================================
+# YOUR TURN — part 2
+#
+# Choose an emotion for each button!
 #
 #   HAPPY     big, round friendly eyes
 #   TIRED     droopy eyelids
@@ -51,12 +60,12 @@ EMOTION_2 = DEFAULT    # right button (IO17)
 
 # --- Main loop ---
 # robo.update() draws the next frame of the animation.
-# We check both buttons every frame — if one is pressed, the emotion changes.
+# We check both buttons every frame — if PRESSED, the emotion changes.
 while True:
     robo.update()
 
-    if button1.value() == 0:    # left button pressed → signal is 0
+    if button1.value() == PRESSED:
         robo.mood = EMOTION_1
 
-    if button2.value() == 0:    # right button pressed → signal is 0
+    if button2.value() == PRESSED:
         robo.mood = EMOTION_2
