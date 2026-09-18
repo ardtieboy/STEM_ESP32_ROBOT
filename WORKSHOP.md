@@ -100,22 +100,7 @@ Where you connect the other leg of the button decides what signal you read:
 | VCC (3.3 V) | 0 | **1** |
 | GND (0 V)   | 1 | **0** |
 
-```
-  Option A — button to VCC       Option B — button to GND  ← our board
-
-       VCC                              3.3V
-        │                                │
-       [/] ← button (open)           [≡≡≡] ← pull-up (built into ESP32)
-        │                                │
-       PIN                             PIN
-                                         │
-                                        [/] ← button (open)
-                                         │
-                                        GND
-
-  not pressed → PIN = 0           not pressed → PIN = 1
-  pressed     → PIN = 1           pressed     → PIN = 0
-```
+![Button wiring diagram](button_diagram.svg)
 
 Our buttons have one leg on the pin and the other leg on **GND**. The ESP32 also has a built-in pull-up resistor that holds the pin at **1** when the button is open.
 
