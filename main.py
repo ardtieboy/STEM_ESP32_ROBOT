@@ -5,12 +5,17 @@ buzzer  = Pin(23, Pin.OUT, value=1)  # HIGH = silent (active-LOW)
 button1 = Pin(16, Pin.IN, Pin.PULL_UP)
 button2 = Pin(17, Pin.IN, Pin.PULL_UP)
 
+# -----------------------------------------------
+# Note → frequency table
+# Each note has a number called its frequency (Hz).
+# A higher number = a higher pitch.
+# -----------------------------------------------
 NOTES = {
     'C4': 262, 'D4': 294, 'E4': 330, 'F4': 349,
     'G4': 392, 'A4': 440, 'B4': 494,
     'C5': 523, 'D5': 587, 'E5': 659, 'F5': 698,
     'G5': 784, 'A5': 880,
-    '_':  0,
+    '_':  0,   # rest (silence)
 }
 
 def play(note, duration):
@@ -31,19 +36,22 @@ def play(note, duration):
 def beep():
     play('A4', 0.1)
 
-# Twinkle Twinkle Little Star
+# -----------------------------------------------
+# EXERCISE: Compose your own melody!
+#
+# 1. Go to noobnotes.net and find your favourite song
+# 2. Match the letters on screen to the notes above
+#    (add 4 or 5 after the letter — e.g. C → 'C4')
+# 3. Add each note as ('NOTE', duration):
+#      0.2 = short   0.4 = medium   0.6 = long
+#
+# Examples:
+#   ('C4', 0.3)   plays a C for 0.3 seconds
+#   ('_',  0.2)   is a short pause
+# -----------------------------------------------
 MY_MELODY = [
-    ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
-    ('_', .1),
-    ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.5),
-    ('_', .1),
-    ('G4',.3),('G4',.3),('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.5),
-    ('_', .1),
-    ('G4',.3),('G4',.3),('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.5),
-    ('_', .1),
-    ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
-    ('_', .1),
-    ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.6),
+    # Write your notes here! ↓
+    ('C4', 0.3),
 ]
 
 def play_melody():
@@ -55,6 +63,6 @@ while True:
     if button1.value() == 0:    # left button  → beep
         beep()
         time.sleep(0.2)
-    if button2.value() == 0:    # right button → melody
+    if button2.value() == 0:    # right button → your melody
         play_melody()
         time.sleep(0.5)
