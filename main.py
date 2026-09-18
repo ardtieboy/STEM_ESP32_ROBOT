@@ -1,62 +1,60 @@
-# -----------------------------------------------
-# Buzzer exercise — play a melody!
-#
-# Wiring:
-#   Buzzer VCC  ->  3.3V
-#   Buzzer GND  ->  GND
-#   Buzzer I/O  ->  GPIO 23
-# -----------------------------------------------
-
 from machine import Pin
 import time
 
-buzzer = Pin(23, Pin.OUT, value=1)  # HIGH = silent (active-LOW buzzer)
+buzzer  = Pin(23, Pin.OUT, value=1)  # HIGH = silent (active-LOW)
+button1 = Pin(16, Pin.IN, Pin.PULL_UP)
+button2 = Pin(17, Pin.IN, Pin.PULL_UP)
 
-# --- Note frequencies (Hz) ---
 NOTES = {
     'C4': 262, 'D4': 294, 'E4': 330, 'F4': 349,
     'G4': 392, 'A4': 440, 'B4': 494,
     'C5': 523, 'D5': 587, 'E5': 659, 'F5': 698,
     'G5': 784, 'A5': 880,
-    '_':  0,   # silence / rest
+    '_':  0,
 }
 
 def play(note, duration):
     freq = NOTES[note]
     if freq == 0:
-        buzzer.value(0)
+        buzzer.value(1)
         time.sleep(duration)
     else:
-        # Toggle the pin at the right frequency to produce the tone
         half_us = 500000 // freq
-        cycles = int(duration * freq)
+        cycles  = int(duration * freq)
         for _ in range(cycles):
-            buzzer.value(0)   # LOW = buzz
+            buzzer.value(0)   # LOW  = buzz
             time.sleep_us(half_us)
             buzzer.value(1)   # HIGH = silent
             time.sleep_us(half_us)
-    time.sleep_us(50000)  # short gap between notes
+    time.sleep_us(30000)
 
-# -----------------------------------------------
-# Exercise: change the melody below!
-# Each entry is ('NOTE', duration_in_seconds)
-# Try changing notes or adding your own!
-# -----------------------------------------------
+def beep():
+    play('A4', 0.1)
 
-MELODY = [
-    # Mary Had a Little Lamb
-    ('E4', 0.3), ('D4', 0.3), ('C4', 0.3), ('D4', 0.3),
-    ('E4', 0.3), ('E4', 0.3), ('E4', 0.6),
-    ('_',  0.1),
-    ('D4', 0.3), ('D4', 0.3), ('D4', 0.6),
-    ('_',  0.1),
-    ('E4', 0.3), ('G4', 0.3), ('G4', 0.6),
+# Twinkle Twinkle Little Star
+MY_MELODY = [
+    ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
+    ('_', .1),
+    ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.5),
+    ('_', .1),
+    ('G4',.3),('G4',.3),('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.5),
+    ('_', .1),
+    ('G4',.3),('G4',.3),('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.5),
+    ('_', .1),
+    ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
+    ('_', .1),
+    ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.6),
 ]
 
-for note, duration in MELODY:
-    play(note, duration)
+def play_melody():
+    for note, duration in MY_MELODY:
+        play(note, duration)
+    buzzer.value(1)
 
-# Pin stays HIGH — buzzer stays silent (active-LOW)
-buzzer.value(1)
 while True:
-    time.sleep(1)
+    if button1.value() == 0:    # left button  → beep
+        beep()
+        time.sleep(0.2)
+    if button2.value() == 0:    # right button → melody
+        play_melody()
+        time.sleep(0.5)
