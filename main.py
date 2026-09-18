@@ -7,9 +7,21 @@ i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400000)
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 blue_zone = framebuf.FrameBuffer(memoryview(oled.buffer)[256:], 128, 48, framebuf.MONO_VLSB)
 
-# Available emotions: DEFAULT  HAPPY  TIRED  ANGRY  CURIOUS
-EMOTION_1 = HAPPY    # button 1 (IO16) — left button
-EMOTION_2 = ANGRY    # button 2 (IO17) — right button
+# -----------------------------------------------
+# EXERCISE: Choose an emotion for each button!
+#
+# Available emotions:
+#   DEFAULT   — neutral look
+#   HAPPY     — big friendly eyes
+#   TIRED     — droopy eyelids
+#   ANGRY     — frowning eyebrows
+#   CURIOUS   — one eye bigger than the other
+#
+# Replace DEFAULT below with your chosen emotion.
+# -----------------------------------------------
+
+EMOTION_1 = DEFAULT    # button 1 (IO16) — left button
+EMOTION_2 = DEFAULT    # button 2 (IO17) — right button
 
 button1 = Pin(16, Pin.IN, Pin.PULL_UP)
 button2 = Pin(17, Pin.IN, Pin.PULL_UP)
