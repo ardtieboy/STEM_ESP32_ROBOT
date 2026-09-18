@@ -9,13 +9,14 @@ button2 = Pin(17, Pin.IN, Pin.PULL_UP)
 # Note → frequency table
 # Each note has a number called its frequency (Hz).
 # A higher number = a higher pitch.
+# Uppercase = normal octave, lowercase = one octave higher.
 # -----------------------------------------------
 NOTES = {
-    'C4': 262, 'D4': 294, 'E4': 330, 'F4': 349,
-    'G4': 392, 'A4': 440, 'B4': 494,
-    'C5': 523, 'D5': 587, 'E5': 659, 'F5': 698,
-    'G5': 784, 'A5': 880,
-    '_':  0,   # rest (silence)
+    'C': 262, 'D': 294, 'E': 330, 'F': 349,
+    'G': 392, 'A': 440, 'B': 494,
+    'c': 523, 'd': 587, 'e': 659, 'f': 698,
+    'g': 784, 'a': 880,
+    '_': 0,    # rest (silence)
 }
 
 def play(note, duration):
@@ -34,24 +35,24 @@ def play(note, duration):
     time.sleep_us(30000)
 
 def beep():
-    play('A4', 0.1)
+    play('A', 0.1)
 
 # -----------------------------------------------
 # EXERCISE: Compose your own melody!
 #
 # 1. Go to noobnotes.net and find your favourite song
-# 2. Match the letters on screen to the notes above
-#    (add 4 or 5 after the letter — e.g. C → 'C4')
+# 2. Copy the letters — just wrap each in quotes: C → 'C'
+#    Use lowercase for higher notes: c d e f g a
 # 3. Add each note as ('NOTE', duration):
 #      0.2 = short   0.4 = medium   0.6 = long
 #
 # Examples:
-#   ('C4', 0.3)   plays a C for 0.3 seconds
-#   ('_',  0.2)   is a short pause
+#   ('C', 0.3)   plays a C for 0.3 seconds
+#   ('_', 0.2)   is a short pause
 # -----------------------------------------------
 MY_MELODY = [
     # Write your notes here! ↓
-    ('C4', 0.3),
+    ('C', 0.3),
 ]
 
 def play_melody():
