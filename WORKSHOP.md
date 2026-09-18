@@ -65,7 +65,7 @@ That's it — no terminal commands needed!
 
 ### What you will build
 
-Animated robot eyes on the OLED screen. Press a button and the eyes change emotion.
+Animated robot eyes on the OLED screen that show a mood you choose.
 
 ### Walk through the code
 
@@ -77,15 +77,39 @@ Open **main.py** from the ESP32 in Thonny and read through it from top to bottom
 
 **3. Robot eyes setup** — create the animation and tell it to blink automatically.
 
-**4. Buttons** — read this carefully, because you will need to figure something out!
+**4. Your turn** — one line to change (see below).
 
-**5. Your turn** — two things to fill in (see below).
-
-**6. Main loop** — runs forever, drawing the next animation frame and checking the buttons every time.
+**5. Main loop** — runs forever, drawing the next animation frame.
 
 ---
 
-### How does a button work?
+### Your task — choose an emotion
+
+Find this line at the bottom of the setup:
+
+```python
+EMOTION = DEFAULT   # <-- change this!
+```
+
+Replace `DEFAULT` with one of these:
+
+| Name | What it looks like |
+|------|--------------------|
+| `DEFAULT` | Calm, neutral eyes |
+| `HAPPY` | Big, round friendly eyes |
+| `TIRED` | Droopy eyelids |
+| `ANGRY` | Frowning, narrowed eyes |
+| `CURIOUS` | One eye bigger than the other |
+
+Save (**Ctrl + S**) and restart. See the eyes change!
+
+---
+
+### Part 2 — add buttons (type this yourself!)
+
+Now you will wire two buttons and make them switch emotions. Your tutor will help you connect the buttons to the board.
+
+**How does a button work?**
 
 Every pin on the ESP32 reads a **digital signal** — a value that is always either:
 
@@ -102,46 +126,34 @@ Where you connect the other leg of the button decides what signal you read:
 
 ![Button wiring diagram](button_diagram.svg)
 
-Our buttons have one leg on the pin and the other leg on **GND**. The ESP32 also has a built-in pull-up resistor that holds the pin at **1** when the button is open.
+Our buttons are wired to **GND**. The ESP32 has a built-in pull-up resistor that holds the pin at **1** when the button is open.
 
-**Question:** when our button is pressed, does `button.value()` return `0` or `1`?
-
----
-
-### Your task — part 1: figure out the pressed value
-
-Find this line in the code:
+**Add this code** just before the `while True:` loop:
 
 ```python
-PRESSED = None   # <-- change None to 0 or 1
+button1 = Pin(16, Pin.IN, Pin.PULL_UP)   # left button
+button2 = Pin(17, Pin.IN, Pin.PULL_UP)   # right button
+
+PRESSED = ???      # <-- 0 or 1? think about the wiring!
+EMOTION_1 = HAPPY
+EMOTION_2 = ANGRY
 ```
 
-Fill in the correct value based on the wiring above. The buttons won't respond until you get this right!
-
-### Your task — part 2: choose your emotions
+**Add this inside the loop** (indented with 4 spaces):
 
 ```python
-EMOTION_1 = DEFAULT    # left button  (IO16)
-EMOTION_2 = DEFAULT    # right button (IO17)
+    if button1.value() == PRESSED:
+        robo.mood = EMOTION_1
+
+    if button2.value() == PRESSED:
+        robo.mood = EMOTION_2
 ```
 
-Replace `DEFAULT` with the emotion you want for each button.
-
-### Available emotions
-
-| Name | What it looks like |
-|------|--------------------|
-| `DEFAULT` | Calm, neutral eyes |
-| `HAPPY` | Big, round friendly eyes |
-| `TIRED` | Droopy eyelids |
-| `ANGRY` | Frowning, narrowed eyes |
-| `CURIOUS` | One eye bigger than the other |
-
-Save (**Ctrl + S**) and restart. Press the buttons and watch the eyes change!
+Save and restart. Press the buttons!
 
 ### Stuck?
 
-Your tutor can switch you to the `robo_eyes_solution` branch where the answer is filled in.
+Your tutor can switch you to the `robo_eyes_solution` branch where the full solution is ready.
 
 ---
 
