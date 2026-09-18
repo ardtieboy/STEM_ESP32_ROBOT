@@ -166,18 +166,16 @@ Button 1 plays a short beep. Button 2 plays a song you write yourself!
 ### Note cheat sheet
 
 ```
-C4 = 262    D4 = 294    E4 = 330    F4 = 349
-G4 = 392    A4 = 440    B4 = 494
-C5 = 523    D5 = 587    E5 = 659    F5 = 698
-G5 = 784    A5 = 880
-_  = silence (pause)
+C  D  E  F  G  A  B       ← normal octave
+c  d  e  f  g  a          ← one octave higher (lowercase)
+_                          ← silence / pause
 ```
 
 ### Finding your melody
 
 Go to **[noobnotes.net](https://noobnotes.net)** and search for your favourite song. The site shows you the letter names of the notes.
 
-Match each letter to the table above (add a `4` or `5` after the letter — so `C` becomes `'C4'`).
+Copy the letters directly — just wrap each one in quotes: `C` → `'C'`. Use lowercase for the higher notes: `c d e f g a`.
 
 ### Your task
 
@@ -186,7 +184,7 @@ Switch to the `musical_buzzer_exercise` branch, then open **main.py** from the E
 ```python
 MY_MELODY = [
     # Write your notes here! ↓
-    ('C4', 0.3),
+    ('C', 0.3),
 ]
 ```
 
@@ -194,10 +192,10 @@ Replace the example with your own notes. Each entry is `('NOTE', duration)`:
 
 ```python
 MY_MELODY = [
-    ('E4', 0.3),   # short E
-    ('D4', 0.3),   # short D
-    ('C4', 0.6),   # long  C
-    ('_',  0.2),   # pause
+    ('E', 0.3),   # short E
+    ('D', 0.3),   # short D
+    ('C', 0.6),   # long  C
+    ('_', 0.2),   # pause
 ]
 ```
 
