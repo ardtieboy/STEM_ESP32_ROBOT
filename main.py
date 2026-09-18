@@ -17,14 +17,47 @@ while not ap.active():
 # --- Buzzer ---
 buzzer = Pin(23, Pin.OUT, value=1)  # HIGH = silent (active-LOW)
 
-def beep(freq=880, duration=0.08):
-    half_us = 500000 // freq
-    cycles  = int(duration * freq)
-    for _ in range(cycles):
-        buzzer.value(0)
-        time.sleep_us(half_us)
+NOTES = {
+    'C4':262,'D4':294,'E4':330,'F4':349,'G4':392,'A4':440,'B4':494,
+    'C5':523,'D5':587,'E5':659,'F5':698,'G5':784,'_':0,
+}
+
+def _play_note(freq, duration):
+    if freq == 0:
         buzzer.value(1)
-        time.sleep_us(half_us)
+        time.sleep(duration)
+    else:
+        half_us = 500000 // freq
+        cycles  = int(duration * freq)
+        for _ in range(cycles):
+            buzzer.value(0)
+            time.sleep_us(half_us)
+            buzzer.value(1)
+            time.sleep_us(half_us)
+    time.sleep_us(30000)
+
+def beep(freq=880, duration=0.08):
+    _play_note(freq, duration)
+
+MELODY = [
+    # Twinkle Twinkle Little Star
+    ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
+    ('_', .1),
+    ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.5),
+    ('_', .1),
+    ('G4',.3),('G4',.3),('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.5),
+    ('_', .1),
+    ('G4',.3),('G4',.3),('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.5),
+    ('_', .1),
+    ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
+    ('_', .1),
+    ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.6),
+]
+
+def play_song():
+    for note, dur in MELODY:
+        _play_note(NOTES[note], dur)
+    buzzer.value(1)
 
 # --- OLED Display ---
 i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400000)
@@ -74,6 +107,7 @@ PAGE = (
     '.angry{background:#dd3333;color:#fff}'
     '.curious{background:#33bbaa;color:#111}'
     '.beep{background:#9b59b6;color:#fff;margin-top:20px}'
+    '.song{background:#e67e22;color:#fff;margin-top:8px}'
     '</style></head><body>'
     '<h1>Robot Eyes</h1>'
     '<div class="build">build: %%BUILD%%</div>'
@@ -84,6 +118,7 @@ PAGE = (
     '<a href="/mood/angry"   class="angry   %%A%%">Angry</a>'
     '<a href="/mood/curious" class="curious %%C%%">Curious</a>'
     '<br><a href="/beep" class="beep">Beep!</a>'
+    '<br><a href="/song" class="song">Play Song</a>'
     '</body></html>'
 )
 
@@ -98,6 +133,7 @@ def send_page(conn, mood):
     conn.send(page.encode())
 
 do_beep = False
+do_song = False
 
 while True:
     robo.update()
@@ -105,6 +141,10 @@ while True:
     if do_beep:
         beep()
         do_beep = False
+
+    if do_song:
+        play_song()
+        do_song = False
 
     try:
         conn, addr = srv.accept()
@@ -116,6 +156,8 @@ while True:
 
         if b'/beep' in req:
             do_beep = True
+        elif b'/song' in req:
+            do_song = True
         else:
             for mood in MOODS:
                 if ('/mood/' + mood).encode() in req:
