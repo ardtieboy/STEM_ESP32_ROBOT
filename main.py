@@ -45,3 +45,10 @@ robo.mood = EMOTION
 # robo.update() draws the next frame of the animation.
 while True:
     robo.update()
+
+    # Part 2: remove the # at the start of the 4 lines below.
+    # Only the # (don't delete any spaces!)
+    #if button1.value() == PRESSED:
+    #    robo.mood = EMOTION_1
+    #if button2.value() == PRESSED:
+    #    robo.mood = EMOTION_2
