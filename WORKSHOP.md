@@ -134,6 +134,8 @@ Replace `DEFAULT` with one of these:
 | `ANGRY` | Frowning, narrowed eyes |
 | `CURIOUS` | One eye bigger than the other |
 
+> 💡 Type the emotion in **CAPITALS**, exactly like in the table: `HAPPY`, not `happy`. Python sees those as two different words.
+
 Save (**Ctrl + S**) and restart. See the eyes change!
 
 ---
@@ -161,7 +163,7 @@ Where you connect the other leg of the button decides what signal you read:
 
 Our buttons are wired to **GND**. The ESP32 has a built-in pull-up resistor that holds the pin at **1** when the button is open.
 
-**Add this code** just before the `while True:` loop:
+**Step 1 — Type this code** on the empty line just above `# --- Main loop ---`:
 
 ```python
 button1 = Pin(16, Pin.IN, Pin.PULL_UP)   # left button
@@ -172,15 +174,20 @@ EMOTION_1 = HAPPY
 EMOTION_2 = ANGRY
 ```
 
-**Add this inside the loop** (indented with 4 spaces):
+Now replace `???` with **0** or **1**. Which one is right? Look at the table above. Our buttons are wired to **GND**.
+
+> ⚠️ Did you choose `HAPPY` or `ANGRY` in Part 1? Then that button will look like it does nothing, because the eyes already look like that! Change `EMOTION_1` or `EMOTION_2` to a different emotion.
+
+**Step 2 — Switch on the button code.** At the bottom of the file, inside the loop, you'll find these lines:
 
 ```python
-    if button1.value() == PRESSED:
-        robo.mood = EMOTION_1
-
-    if button2.value() == PRESSED:
-        robo.mood = EMOTION_2
+    #if button1.value() == PRESSED:
+    #    robo.mood = EMOTION_1
+    #if button2.value() == PRESSED:
+    #    robo.mood = EMOTION_2
 ```
+
+The `#` turns a line off, so the computer skips it. Remove **only the `#`** at the start of each of the 4 lines. Don't delete any spaces, because the spaces tell Python which lines belong together.
 
 Save and restart. Press the buttons!
 
