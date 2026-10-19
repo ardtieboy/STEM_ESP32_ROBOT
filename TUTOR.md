@@ -10,7 +10,7 @@ When students sit down and plug in their board, the OLED screen shows:
 
 ```
 Hello,
-[their name]!
+<NAME>!
 
 STEM Club
 ```
@@ -21,7 +21,7 @@ This is the `main` branch — pre-flashed before the workshop. Use this moment t
 - The board is fully set up — they do not need to install anything
 - Today they will change the code themselves, step by step
 
-Then walk them through opening Thonny and switching to `robo_eyes_exercise`.
+Then walk them through opening Thonny and the **Warm-up** in WORKSHOP.md: replace `<NAME>` with their own name (keep the quotes!), Ctrl+S, F5. It is their first edit and their first success. After that, switch to `robo_eyes_exercise` together.
 
 ---
 
@@ -84,17 +84,15 @@ Before each workshop, delete the folder and clone again. This gets the latest ex
 
 ### 1. Prepare one board per pupil
 
-Every pupil gets their own board. Each board is erased, flashed with MicroPython v1.29.0, and gets the library files (`ssd1306.py`, `roboeyes.py`, `fbutil.py`) plus the Hello World `main.py` showing the pupil's name. Plug in **one board at a time** and run:
+Every pupil gets their own board. Each board is erased, flashed with MicroPython v1.29.0, and gets the library files (`ssd1306.py`, `roboeyes.py`, `fbutil.py`) plus the Hello World `main.py`. The screen shows "Hello, <NAME>!", and the pupils fill in their own name as the warm-up. Plug in **one board at a time** and run:
 
 ```bash
-scripts/provision_board.sh Henry
+scripts/provision_board.sh
 ```
 
 The script finds the port, downloads `firmware.bin` if it's missing, and checks at the end that the files are on the board and the OLED responds. It takes about a minute per board. Put a name sticker on each board as you go.
 
-Names must be plain letters (no accents), max 15 characters, so they fit on the OLED.
-
-**For a whole class with Claude Code:** run `/provision-board pupils.md`. It goes through the list one board at a time, tells you when to swap boards, and gives a summary at the end. Keep the names file out of git.
+**For a whole class with Claude Code:** run `/provision-board 20` (number of boards), or `/provision-board pupils.md` to also be told which name sticker goes on each board. It tells you when to swap boards and gives a summary at the end. Keep the names file out of git.
 
 <details>
 <summary>Manual steps (what the script does)</summary>
@@ -110,7 +108,7 @@ mpremote connect /dev/cu.usbserial-XXXXXXXX \
   cp roboeyes.py :roboeyes.py + \
   cp fbutil.py :fbutil.py
 
-git checkout main                   # Hello World; set NAME in main.py first
+git checkout main                   # Hello World with NAME = "<NAME>"
 mpremote connect /dev/cu.usbserial-XXXXXXXX cp main.py :main.py + reset
 ```
 </details>
@@ -306,10 +304,10 @@ Then retry the upload.
 
 ### Board needs to be reflashed from scratch
 
-Run the setup script again with the pupil's name. It erases everything on the board.
+Run the setup script again. It erases everything on the board, so the pupil redoes the warm-up.
 
 ```bash
-scripts/provision_board.sh Henry
+scripts/provision_board.sh
 ```
 
 ---
@@ -318,7 +316,7 @@ scripts/provision_board.sh Henry
 
 | Branch | Contents |
 |--------|----------|
-| `main` | Hello World — displays the student's name on the OLED |
+| `main` | Hello World + warm-up: pupils replace `<NAME>` with their own name |
 | `robo_eyes_exercise` | Exercise 1 with gaps |
 | `robo_eyes_solution` | Exercise 1 complete |
 | `musical_buzzer_exercise` | Exercise 2 with gaps |

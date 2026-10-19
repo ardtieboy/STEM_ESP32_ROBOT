@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Get one ESP32 ready for the workshop: erase it, flash MicroPython, upload
-# the library files and the Hello World main.py with the pupil's name.
+# the library files and the Hello World main.py. The screen then says
+# "Hello, <NAME>!" and the pupil fills in their own name as the warm-up.
 #
-# Usage: scripts/provision_board.sh <NAME> [PORT]
+# Usage: scripts/provision_board.sh [PORT]
 #   PORT is auto-detected when exactly one ESP32 is plugged in.
 #   DRY_RUN=1 prepares the files and prints the commands without flashing.
 set -euo pipefail
 
-NAME="${1:?usage: $0 <NAME> [PORT]}"
-PORT="${2:-}"
+PORT="${1:-}"
 REPO="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
 FIRMWARE="$REPO/firmware.bin"
 FIRMWARE_URL="https://micropython.org/resources/firmware/ESP32_GENERIC-20260824-v1.29.0.bin"
@@ -16,12 +16,6 @@ LIB_BRANCH=robo_eyes_exercise
 LIBS="ssd1306.py roboeyes.py fbutil.py"
 
 run() { echo "+ $*"; [ -n "${DRY_RUN:-}" ] || "$@"; }
-
-# The OLED font is 8 px wide ASCII on a 128 px screen: "<NAME>!" must fit in 16 characters.
-if ! printf '%s' "$NAME" | grep -Eq '^[A-Za-z][A-Za-z .-]{0,14}$'; then
-  echo "Name must be 1-15 plain letters (spaces, dots and hyphens allowed, no accents): '$NAME'" >&2
-  exit 1
-fi
 
 if [ -z "$PORT" ]; then
   ports=$(ls /dev/cu.usbserial-* /dev/cu.wchusbserial* /dev/cu.SLAB_USBtoUART* /dev/cu.usbmodem* \
@@ -44,10 +38,9 @@ trap 'rm -rf "$STAGE"' EXIT
 for f in $LIBS; do
   git -C "$REPO" show "$LIB_BRANCH:$f" > "$STAGE/$f"
 done
-git -C "$REPO" show main:main.py | sed "s/^NAME = \"[^\"]*\"/NAME = \"$NAME\"/" > "$STAGE/main.py"
-grep -q "^NAME = \"$NAME\"" "$STAGE/main.py" || { echo "Could not set NAME in main.py" >&2; exit 1; }
+git -C "$REPO" show main:main.py > "$STAGE/main.py"
 
-echo "== Provisioning board for '$NAME' on $PORT"
+echo "== Provisioning board on $PORT"
 run esptool --chip esp32 --port "$PORT" erase-flash
 run esptool --chip esp32 --port "$PORT" --baud 460800 write-flash -z 0x1000 "$FIRMWARE"
 
@@ -75,7 +68,7 @@ print("OLED", "ok" if 0x3C in I2C(0, scl=Pin(22), sda=Pin(21)).scan() else "NOT 
 '
 if [ -n "${DRY_RUN:-}" ]; then
   echo "+ mpremote connect $PORT exec <check> + reset"
-  echo "== Dry run done. main.py would contain: $(grep '^NAME' "$STAGE/main.py")"
+  echo "== Dry run done."
   exit 0
 fi
 
@@ -84,8 +77,8 @@ echo "$out"
 mpremote connect "$PORT" reset
 
 if echo "$out" | grep -q "MISSING \[\]" && echo "$out" | grep -q "OLED ok"; then
-  echo "== OK: board for '$NAME' is ready, and the screen should say 'Hello, $NAME!'"
+  echo "== OK: board is ready, and the screen should say 'Hello, <NAME>!'"
 else
-  echo "== PROBLEM: board for '$NAME' failed the check (see above)" >&2
+  echo "== PROBLEM: board failed the check (see above)" >&2
   exit 1
 fi

@@ -3,7 +3,7 @@
 # Then save the file and push it to the board.
 # -----------------------------------------------
 
-NAME = "ARD"  # <-- change this to your name
+NAME = "<NAME>"  # <-- change this to your name
 
 # --- Don't change anything below this line ---
 
