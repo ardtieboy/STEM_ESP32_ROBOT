@@ -74,47 +74,40 @@ Verify it launches and can detect a connected ESP32:
 4. **Ctrl + S** to save to the board
 5. **Stop/Restart** button (or F5) to run
 
-### 1. Flash all boards
+### 1. Prepare one board per pupil
 
-Every board must have MicroPython v1.29.0 flashed before students arrive.
+Every pupil gets their own board. Each board is erased, flashed with MicroPython v1.29.0, and gets the library files (`ssd1306.py`, `roboeyes.py`, `fbutil.py`) plus the Hello World `main.py` showing the pupil's name. Plug in **one board at a time** and run:
 
-**Find the port:**
 ```bash
-ls /dev/cu.*
+scripts/provision_board.sh Henry
 ```
-Look for something like `/dev/cu.usbserial-XXXXXXXX`.
 
-**Erase and flash:**
+The script finds the port, downloads `firmware.bin` if it's missing, and checks at the end that the files are on the board and the OLED responds. It takes about a minute per board. Put a name sticker on each board as you go.
+
+Names must be plain letters (no accents), max 15 characters, so they fit on the OLED.
+
+**For a whole class with Claude Code:** run `/provision-board pupils.md`. It goes through the list one board at a time, tells you when to swap boards, and gives a summary at the end. Keep the names file out of git.
+
+<details>
+<summary>Manual steps (what the script does)</summary>
+
 ```bash
 esptool --chip esp32 --port /dev/cu.usbserial-XXXXXXXX erase-flash
-
 esptool --chip esp32 --port /dev/cu.usbserial-XXXXXXXX --baud 460800 \
   write-flash -z 0x1000 firmware.bin
-```
 
-Flashing takes about 30 seconds per board.
-
-### 2. Upload library files (once per board)
-
-The OLED and robot eyes exercises need three library files. Upload them to each board:
-
-```bash
+git checkout robo_eyes_exercise     # library files live on the exercise branches
 mpremote connect /dev/cu.usbserial-XXXXXXXX \
   cp ssd1306.py :ssd1306.py + \
   cp roboeyes.py :roboeyes.py + \
   cp fbutil.py :fbutil.py
-```
 
-### 3. Set the starting branch
-
-Put each board's code on `robo_eyes_exercise` so students start from the first exercise:
-
-```bash
-git checkout robo_eyes_exercise
+git checkout main                   # Hello World; set NAME in main.py first
 mpremote connect /dev/cu.usbserial-XXXXXXXX cp main.py :main.py + reset
 ```
+</details>
 
-### 4. Confirm everything works
+### 2. Confirm everything works
 
 Connect your own board to a screen and run through each exercise quickly. The OLED should show animated eyes, buttons should respond, and the WiFi AP should appear on your phone.
 
@@ -303,17 +296,10 @@ Then retry the upload.
 
 ### Board needs to be reflashed from scratch
 
+Run the setup script again with the pupil's name. It erases everything on the board.
+
 ```bash
-esptool --chip esp32 --port /dev/cu.usbserial-XXXXXXXX erase-flash
-
-esptool --chip esp32 --port /dev/cu.usbserial-XXXXXXXX --baud 460800 \
-  write-flash -z 0x1000 firmware.bin
-
-mpremote connect /dev/cu.usbserial-XXXXXXXX \
-  cp ssd1306.py :ssd1306.py + \
-  cp roboeyes.py :roboeyes.py + \
-  cp fbutil.py :fbutil.py + \
-  cp main.py :main.py + reset
+scripts/provision_board.sh Henry
 ```
 
 ---
