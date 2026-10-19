@@ -66,6 +66,14 @@ Verify it launches and can detect a connected ESP32:
 > ```
 > A logout/login is required for this to take effect.
 
+### Clone the workshop repo on every student computer
+
+Pupils load each exercise with `git checkout`, so every computer needs the repo, in a folder that's easy to find:
+```bash
+git clone https://github.com/ardtieboy/STEM_ESP32_ROBOT.git ~/STEM_ESP32_ROBOT
+```
+Before each workshop, delete the folder and clone again. This gets the latest exercises and removes leftovers from the last group (`git pull` would only update the branch that is checked out).
+
 ### Thonny workflow for students (summarised)
 
 1. **View → Files** to show the file panel
@@ -115,7 +123,9 @@ Connect your own board to a screen and run through each exercise quickly. The OL
 
 ## Workshop flow — when to switch branches
 
-At the start of each exercise, students need the right code on their board. Walk around the room and run the two commands below on each computer, or show students how to do it themselves in the terminal.
+At the start of each exercise, students need the right code on their board. **Do this together as a group:** every exercise in WORKSHOP.md starts with a ✋ *Before you start* box with the same steps. Project it, go through it step by step, and walk around to help anyone who gets stuck. Make sure every pupil reaches the ✅ *It worked if* result before the group starts the exercise.
+
+The commands below are the tutor version, for helping one pupil (e.g. someone who arrived late).
 
 ### Opening — Hello World (already on the board)
 
