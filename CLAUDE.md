@@ -70,20 +70,10 @@ NOTES = {
 | `wifi_robot_exercise` | Gaps: `WIFI_NAME`, two `XXX` entries in MOODS dict |
 | `wifi_robot_solution` | Complete WiFi robot with mood control webpage |
 
-**Doc sync rule:** WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg live on `main` and must be copied to all exercise/solution branches after every change. Use this pattern:
-```bash
-git show main:WORKSHOP.md > /tmp/ws_WORKSHOP.md
-# ... (same for other files)
-for branch in robo_eyes_exercise robo_eyes_solution musical_buzzer_exercise musical_buzzer_solution wifi_robot_exercise wifi_robot_solution; do
-  git stash -u -q 2>/dev/null || true
-  git checkout "$branch" -q
-  cp /tmp/ws_WORKSHOP.md WORKSHOP.md
-  # ... copy other files ...
-  git add WORKSHOP.md TUTOR.md BOM.md button_diagram.svg
-  git diff --cached --quiet || git commit -q -m "Sync docs from main"
-done
-git checkout main -q
-```
+**Doc sync (automatic):** WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg and CLAUDE.md live on `main`. Only edit them on `main`. The `.githooks/post-commit` hook copies them to all six exercise/solution branches after each commit on `main`, adding a "Sync docs from main" commit where something changed. It uses git plumbing, so no checkout happens and the working tree is untouched.
+- Enable once per clone: `git config core.hooksPath .githooks`
+- The hook does not push. Publish everything with `git push origin main robo_eyes_exercise robo_eyes_solution musical_buzzer_exercise musical_buzzer_solution wifi_robot_exercise wifi_robot_solution`
+- To add a synced file or branch, edit `FILES` / `BRANCHES` at the top of the hook.
 
 ## Exercise structure decisions
 

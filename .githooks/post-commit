@@ -1,0 +1,32 @@
+#!/bin/sh
+# Sync shared docs from main to every exercise/solution branch after each
+# commit on main. Uses git plumbing, so nothing is checked out and the
+# working tree is never touched. Enable once per clone with:
+#   git config core.hooksPath .githooks
+
+[ "$(git symbolic-ref --short -q HEAD)" = main ] || exit 0
+
+FILES="WORKSHOP.md TUTOR.md BOM.md button_diagram.svg CLAUDE.md"
+BRANCHES="robo_eyes_exercise robo_eyes_solution musical_buzzer_exercise musical_buzzer_solution wifi_robot_exercise wifi_robot_solution"
+
+tmp_index="$(git rev-parse --git-dir)/sync-docs-index"
+main_short=$(git rev-parse --short main)
+
+for b in $BRANCHES; do
+  old=$(git rev-parse -q --verify "refs/heads/$b") || continue
+  rm -f "$tmp_index"
+  GIT_INDEX_FILE="$tmp_index" git read-tree "$old"
+  for f in $FILES; do
+    entry=$(git ls-tree main -- "$f")
+    [ -n "$entry" ] || continue
+    mode=$(echo "$entry" | awk '{print $1}')
+    blob=$(echo "$entry" | awk '{print $3}')
+    GIT_INDEX_FILE="$tmp_index" git update-index --add --cacheinfo "$mode,$blob,$f"
+  done
+  tree=$(GIT_INDEX_FILE="$tmp_index" git write-tree)
+  [ "$tree" = "$(git rev-parse "$old^{tree}")" ] && continue
+  new=$(git commit-tree "$tree" -p "$old" -m "Sync docs from main ($main_short)")
+  git update-ref "refs/heads/$b" "$new" "$old" && echo "sync-docs: updated $b"
+done
+
+rm -f "$tmp_index"
