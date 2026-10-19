@@ -63,7 +63,7 @@ NOTES = {
 | Branch | Contents |
 |--------|---------|
 | `main` | Welcome screen (`NAME = "<NAME>"`, pupils fill in their name as warm-up), WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg |
-| `robo_eyes_exercise` | OLED eyes, single `EMOTION = DEFAULT` to change, no buttons yet |
+| `robo_eyes_exercise` | OLED eyes, single `EMOTION = DEFAULT` to change; button `if` lines pre-typed but commented out in the loop |
 | `robo_eyes_solution` | Full solution: `PRESSED = 0`, `EMOTION_1 = HAPPY`, `EMOTION_2 = ANGRY` |
 | `musical_buzzer_exercise` | 3 tasks: change beep note, guess/replace mystery song, wire up buttons with `pass` placeholders |
 | `musical_buzzer_solution` | Full solution with Let It Go (Frozen) as default melody |
@@ -77,7 +77,7 @@ NOTES = {
 
 ## Exercise structure decisions
 
-- **Exercise 1 (robo_eyes):** Two parts — Part 1: choose one emotion (in code), Part 2: students manually type the button code themselves during the session.
+- **Exercise 1 (robo_eyes):** Two parts — Part 1: choose one emotion (in code), Part 2: students type the button setup (`button1/2`, `PRESSED = ???` → 0, `EMOTION_1/2`) above the main loop, then remove the `#` from the pre-typed `if` lines in the loop. The lines are pre-typed to avoid Thonny auto-indent mistakes, and commented so Part 1 runs without NameErrors.
 - **Exercise 2 (musical_buzzer):** Three tasks in code: (1) pick beep note via `BEEP_NOTE`, (2) guess mystery song then replace `MY_MELODY` with own song from noobnotes.net, (3) replace `pass` with correct function call in the loop.
 - **Note naming:** Single letters only — no octave numbers. Students copy letters directly from noobnotes.net. Lowercase = higher octave.
 - **Mystery song:** Let It Go (Frozen) — no title or lyric comments in code so pupils guess.
