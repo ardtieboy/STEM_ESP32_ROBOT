@@ -57,11 +57,25 @@ In the bottom panel (ESP32), double-click **main.py** to open it. Make your chan
 Press **Ctrl + S** to save your changes directly to the board.
 Then press the **Stop/Restart** button (or press **F5**) to run your updated code.
 
-That's it — no terminal commands needed!
+That's it! The only time you use the terminal is to load a new exercise, and you do that together with your tutor.
 
 ---
 
 ## Exercise 1 — Robot Eyes 👀
+
+### ✋ Before you start — load the Exercise 1 code
+
+**Wait for your tutor.** We do this step all together, or your tutor helps you.
+
+1. Open a terminal in the workshop folder (`STEM_ESP32_ROBOT`) and type:
+   ```bash
+   git checkout robo_eyes_exercise
+   ```
+2. In Thonny, double-click **main.py** in the **top panel** (this computer).
+3. Click **File → Save as… → MicroPython device** and save it as **main.py** (say yes to replace the old one).
+4. Press **Stop/Restart** (or **F5**).
+
+✅ **It worked if:** two robot eyes appear in the blue part of the screen and blink.
 
 ### What you will build
 
@@ -159,6 +173,20 @@ Your tutor can switch you to the `robo_eyes_solution` branch where the full solu
 
 ## Exercise 2 — Musical Buzzer 🎵
 
+### ✋ Before you start — load the Exercise 2 code
+
+**Wait for your tutor.** We do this step all together, or your tutor helps you.
+
+1. Open a terminal in the workshop folder (`STEM_ESP32_ROBOT`) and type:
+   ```bash
+   git checkout musical_buzzer_exercise
+   ```
+2. In Thonny, double-click **main.py** in the **top panel** (this computer).
+3. Click **File → Save as… → MicroPython device** and save it as **main.py** (say yes to replace the old one).
+4. Press **Stop/Restart** (or **F5**).
+
+✅ **It worked if:** the buttons do nothing yet, and that is fine, because Task 3 fixes it. To check, open **main.py** from the ESP32 (bottom panel). You should find the line `BEEP_NOTE = 'A'`.
+
 ### What you will build
 
 Button 1 plays a short beep. Button 2 plays a song you write yourself!
@@ -216,11 +244,25 @@ Save and restart. Do both buttons work?
 
 ### Stuck?
 
-Your tutor can switch you to `musical_buzzer_solution` — it has a full Twinkle Twinkle Little Star as an example.
+Your tutor can switch you to `musical_buzzer_solution` — it has the full mystery song as an example.
 
 ---
 
 ## Exercise 3 — WiFi Robot 🌐
+
+### ✋ Before you start — load the Exercise 3 code
+
+**Wait for your tutor.** We do this step all together, or your tutor helps you.
+
+1. Open a terminal in the workshop folder (`STEM_ESP32_ROBOT`) and type:
+   ```bash
+   git checkout wifi_robot_exercise
+   ```
+2. In Thonny, double-click **main.py** in the **top panel** (this computer).
+3. Click **File → Save as… → MicroPython device** and save it as **main.py** (say yes to replace the old one).
+4. Press **Stop/Restart** (or **F5**).
+
+✅ **It worked if:** Thonny shows a red error saying `name 'XXX' isn't defined`. That is expected. The `XXX` are the gaps you fill in at Step 2.
 
 ### What you will build
 
@@ -228,7 +270,7 @@ Your ESP32 creates its own WiFi network. Connect to it with your phone, open a w
 
 ### Your task
 
-Switch to the `wifi_robot_exercise` branch, then open **main.py** from the ESP32.
+Open **main.py** from the ESP32 (bottom panel).
 
 **Step 1 — Give your robot a WiFi name:**
 
