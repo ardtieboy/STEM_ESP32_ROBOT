@@ -2,9 +2,9 @@
 
 ## Welcome!
 
-When you sit down, look at the screen on your board. It says **"Hello, [your name]!"** — that was already programmed for you.
+When you sit down, look at the screen on your board. It says **"Hello, <NAME>!"**. The board doesn't know your name yet. Your first job is to teach it!
 
-Today you will change that program yourself, and build three things:
+After that, you will build three things:
 
 1. **Robot Eyes** — animated eyes on the screen that react to buttons
 2. **Musical Buzzer** — compose your own song and play it with a button
@@ -58,6 +58,25 @@ Press **Ctrl + S** to save your changes directly to the board.
 Then press the **Stop/Restart** button (or press **F5**) to run your updated code.
 
 That's it! The only time you use the terminal is to load a new exercise, and you do that together with your tutor.
+
+---
+
+## Warm-up — put your name on the screen 👋
+
+1. In Thonny, open **main.py** from the ESP32 (bottom panel).
+2. Find this line:
+   ```python
+   NAME = "<NAME>"  # <-- change this to your name
+   ```
+3. Replace `<NAME>` with your first name. **Keep the quote marks `" "`!**
+   ```python
+   NAME = "Henry"  # <-- change this to your name
+   ```
+4. Press **Ctrl + S** to save, then **F5** to run.
+
+✅ **It worked if:** the screen says **Hello, Henry!**, with your name.
+
+> 💡 The screen fits about 15 letters, and it can't show accents (é, ë…). Use your first name, written without accents.
 
 ---
 

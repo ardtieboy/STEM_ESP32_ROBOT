@@ -62,7 +62,7 @@ NOTES = {
 
 | Branch | Contents |
 |--------|---------|
-| `main` | Welcome screen (`NAME = "ARD"`), WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg |
+| `main` | Welcome screen (`NAME = "<NAME>"`, pupils fill in their name as warm-up), WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg |
 | `robo_eyes_exercise` | OLED eyes, single `EMOTION = DEFAULT` to change, no buttons yet |
 | `robo_eyes_solution` | Full solution: `PRESSED = 0`, `EMOTION_1 = HAPPY`, `EMOTION_2 = ANGRY` |
 | `musical_buzzer_exercise` | 3 tasks: change beep note, guess/replace mystery song, wire up buttons with `pass` placeholders |
