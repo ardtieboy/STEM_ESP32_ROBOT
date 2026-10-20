@@ -6,14 +6,32 @@ button1 = Pin(16, Pin.IN, Pin.PULL_UP)
 button2 = Pin(17, Pin.IN, Pin.PULL_UP)
 
 NOTES = {
-    'C': 262, 'D': 294, 'E': 330, 'F': 349,
-    'G': 392, 'A': 440, 'B': 494,
-    'c': 523, 'd': 587, 'e': 659, 'f': 698,
-    'g': 784, 'a': 880,
+    # Low notes: noobnotes puts a dot in front (.C)
+    '.C': 131, '.C#': 139, '.D': 147, '.D#': 156, '.E': 165, '.F': 175,
+    '.F#': 185, '.G': 196, '.G#': 208, '.A': 220, '.A#': 233, '.B': 247,
+    # Middle notes: just the letter (C)
+    'C': 262, 'C#': 277, 'D': 294, 'D#': 311, 'E': 330, 'F': 349,
+    'F#': 370, 'G': 392, 'G#': 415, 'A': 440, 'A#': 466, 'B': 494,
+    # High notes: noobnotes puts ^ in front (^C)
+    '^C': 523, '^C#': 554, '^D': 587, '^D#': 622, '^E': 659, '^F': 698,
+    '^F#': 740, '^G': 784, '^G#': 831, '^A': 880, '^A#': 932, '^B': 988,
+    # Very high notes: noobnotes puts * in front (*C)
+    '*C': 1047, '*C#': 1109, '*D': 1175, '*D#': 1245, '*E': 1319, '*F': 1397,
+    '*F#': 1480, '*G': 1568, '*G#': 1661, '*A': 1760, '*A#': 1865, '*B': 1976,
     '_': 0,    # rest (silence)
 }
 
+# Flats sound the same as the sharp just below: Db = C#, Eb = D#, ...
+FLATS = {'C#': 'Db', 'D#': 'Eb', 'F#': 'Gb', 'G#': 'Ab', 'A#': 'Bb'}
+for name in list(NOTES):
+    letter = name.lstrip('.^*')
+    if letter in FLATS:
+        NOTES[name[:len(name) - len(letter)] + FLATS[letter]] = NOTES[name]
+
 def play(note, duration):
+    if note not in NOTES:
+        print('Unknown note:', note, '(check capitals and . ^ * in front)')
+        return
     freq = NOTES[note]
     if freq == 0:
         buzzer.value(1)
@@ -29,10 +47,9 @@ def play(note, duration):
     time.sleep_us(30000)
 
 # ==============================================
-# Task 1 — Choose your beep note
+# Task 2 — Choose your beep note
 #
-# Pick any note: C D E F G A B
-# Lowercase = one octave higher: c d e f g a
+# Pick any note from NOTES above, e.g. 'E', 'F#' or '^C'
 # ==============================================
 BEEP_NOTE = 'A'   # <-- change this!
 
@@ -40,30 +57,31 @@ def beep():
     play(BEEP_NOTE, 0.1)
 
 # ==============================================
-# Task 2 — The mystery song
+# Task 3 — The mystery song
 #
 # Press button 2 to hear it. Can you guess what it is?
 #
 # Once you know, replace MY_MELODY with your own song!
-# Go to noobnotes.net, find a song, and write the notes here.
+# Go to noobnotes.net, find a song, and write the notes here,
+# exactly as noobnotes shows them: D  ^D  .B  F#
 #
 #   ('C', 0.3)  ->  play a C for 0.3 seconds
 #   ('_', 0.2)  ->  silence / pause
 #   Durations:  0.2 = short   0.4 = medium   0.6 = long
 # ==============================================
 MY_MELODY = [
-    ('A',.3),('B',.2),('c',.5),('G',.3),('G',.3),('d',.6),
+    ('A',.3),('B',.2),('^C',.5),('G',.3),('G',.3),('^D',.6),
     ('_',.15),
-    ('c',.5),('A',.2),('A',.2),('A',.3),('A',.15),('B',.15),('c',.5),
+    ('^C',.5),('A',.2),('A',.2),('A',.3),('A',.15),('B',.15),('^C',.5),
     ('_',.2),
-    ('A',.3),('B',.2),('c',.5),('G',.3),('e',.3),('e',.15),('d',.6),
+    ('A',.3),('B',.2),('^C',.5),('G',.3),('^E',.3),('^E',.15),('^D',.6),
     ('_',.15),
-    ('c',.3),('d',.15),('e',.35),('e',.3),('f',.15),('e',.15),('d',.2),('c',.15),('d',.2),('c',.5),
+    ('^C',.3),('^D',.15),('^E',.35),('^E',.3),('^F',.15),('^E',.15),('^D',.2),('^C',.15),('^D',.2),('^C',.5),
     ('_',.3),
-    ('g',.3),('e',.3),('d',.4),
-    ('c',.3),('c',.3),('g',.2),('e',.2),('c',.5),
+    ('^G',.3),('^E',.3),('^D',.4),
+    ('^C',.3),('^C',.3),('^G',.2),('^E',.2),('^C',.5),
     ('_',.2),
-    ('c',.3),('c',.3),('B',.3),('G',.3),('G',.5),
+    ('^C',.3),('^C',.3),('B',.3),('G',.3),('G',.5),
     ('_',.2),
     ('F',.2),('F',.2),('F',.15),('E',.15),('F',.15),('E',.15),('F',.3),('F',.15),('E',.15),('C',.5),
 ]
@@ -74,7 +92,7 @@ def play_melody():
     buzzer.value(1)
 
 # ==============================================
-# Task 3 — Wire up the buttons
+# Task 1 — Wire up the buttons
 #
 # Each button should call either beep() or play_melody().
 # Right now they do nothing — replace pass with a function call!
