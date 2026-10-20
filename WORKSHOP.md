@@ -211,7 +211,7 @@ Your tutor can switch you to the `robo_eyes_solution` branch where the full solu
 3. Click **File → Save as… → MicroPython device** and save it as **main.py** (say yes to replace the old one).
 4. Press **Stop/Restart** (or **F5**).
 
-✅ **It worked if:** the buttons do nothing yet, and that is fine, because Task 3 fixes it. To check, open **main.py** from the ESP32 (bottom panel). You should find the line `BEEP_NOTE = 'A'`.
+✅ **It worked if:** the buttons do nothing yet, and that is fine, because Task 1 fixes it. To check, open **main.py** from the ESP32 (bottom panel). You should find the line `BEEP_NOTE = 'A'`.
 
 ### What you will build
 
@@ -219,42 +219,22 @@ Button 1 plays a short beep. Button 2 plays a song you write yourself!
 
 ### Note cheat sheet
 
+Write the notes **exactly as noobnotes.net shows them**, including any symbol in front:
+
 ```
-C  D  E  F  G  A  B       ← normal octave
-c  d  e  f  g  a          ← one octave higher (lowercase)
-_                          ← silence / pause
-```
-
-### Task 1 — Choose your beep note
-
-Find this line and change `'A'` to any note you like:
-
-```python
-BEEP_NOTE = 'A'   # <-- change this!
+.C  .D  .E  .F  .G  .A  .B     ← low notes (dot in front)
+ C   D   E   F   G   A   B     ← middle notes
+^C  ^D  ^E  ^F  ^G  ^A  ^B     ← high notes (^ in front)
+*C  *D  *E  *F  *G  *A  *B     ← very high notes (* in front)
+F#  ^C#  Bb                    ← sharps (#) and flats (b) work too
+_                              ← silence / pause
 ```
 
-Save, restart, press **button 1** to hear your beep.
+Always use **CAPITAL** letters (`^D`, not `^d`). noobnotes uses `-` to join notes together. Leave it out.
 
-### Task 2 — Guess the mystery song, then write your own
+### Task 1 — Wire up the buttons
 
-Press **button 2**. A song plays — can you guess what it is?
-
-Once you've heard it, replace `MY_MELODY` with your own song. Go to **[noobnotes.net](https://noobnotes.net)**, find a song, and copy the letters:
-
-```python
-MY_MELODY = [
-    ('E', 0.3),   # short E
-    ('D', 0.3),   # short D
-    ('C', 0.6),   # long  C
-    ('_', 0.2),   # pause
-]
-```
-
-Durations: `0.2` = short · `0.4` = medium · `0.6` = long
-
-### Task 3 — Wire up the buttons
-
-The buttons do nothing yet! Find the `while True:` loop at the bottom. Replace `pass` with the right function call — `beep()` or `play_melody()`:
+The buttons do nothing yet! Find the `while True:` loop at the bottom. Replace each `pass` with the right function call, `beep()` or `play_melody()`:
 
 ```python
 while True:
@@ -266,7 +246,46 @@ while True:
         time.sleep(0.5)
 ```
 
-Save and restart. Do both buttons work?
+Button 1 (left) should **beep**, and button 2 (right) should play the **melody**. Save and restart. Do both buttons make a sound?
+
+### Task 2 — Choose your beep note
+
+Find this line and change `'A'` to any note from the cheat sheet:
+
+```python
+BEEP_NOTE = 'A'   # <-- change this!
+```
+
+Save, restart, press **button 1** to hear your beep.
+
+### Task 3 — Guess the mystery song, then write your own
+
+Press **button 2**. A song plays. Can you guess what it is?
+
+Once you've heard it, replace the notes inside `MY_MELODY = [ ... ]` with your own song. Go to **[noobnotes.net](https://noobnotes.net)**, find a song, and copy the notes. For example, noobnotes shows Happy Birthday like this:
+
+```
+D - D   E  -  D   G   F#
+Happy birthday to you
+```
+
+So you type:
+
+```python
+MY_MELODY = [
+    ('D', 0.2),    # short
+    ('D', 0.2),    # short
+    ('E', 0.4),    # medium
+    ('D', 0.4),    # medium
+    ('G', 0.4),    # medium
+    ('F#', 0.6),   # long, F sharp
+    ('_', 0.2),    # pause
+]
+```
+
+Durations: `0.2` = short · `0.4` = medium · `0.6` = long
+
+> 💡 If a note doesn't play, look at the bottom panel in Thonny. It says `Unknown note:` and shows the note it didn't understand.
 
 ### Stuck?
 
@@ -343,8 +362,9 @@ Finished early? Your tutor will show you how to design a case for your robot in 
 
 ### Note names
 ```
-C  D  E  F  G  A  B   ← letter (add 4 or 5)
-Do Re Mi Fa Sol La Si  ← solfège
+.C  C  ^C  *C   ← low · middle · high · very high (as on noobnotes.net)
+C  D  E  F  G  A  B     ← letter
+Do Re Mi Fa Sol La Si   ← solfège
 ```
 
 ### Durations
