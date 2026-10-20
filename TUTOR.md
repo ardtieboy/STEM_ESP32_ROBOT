@@ -227,21 +227,21 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 
 ### Exercise 2 — Musical Buzzer
 
-**What students do:** Write a melody as a list of `('NOTE', duration)` tuples.
+**What students do:** (1) make the buttons work by replacing `pass` with `beep()` / `play_melody()`, (2) pick a beep note, (3) guess the mystery song (Let It Go), then write their own melody as a list of `('NOTE', duration)` tuples.
 
 **Key concept:** Sound is produced by toggling a pin at a specific frequency. Higher frequency = higher pitch.
 
-**Helping with noobnotes.net:**
-- The site shows letters (C, D, E …) with optional numbers (C4, C5)
-- If no number is shown, assume 4 (middle octave)
-- Sharps (C#) are not in the note table — use the next or previous note as an approximation
+**Helping with noobnotes.net:** pupils copy the notes exactly as shown. The code understands noobnotes' own notation:
+- `.C` low · `C` middle · `^C` high · `*C` very high
+- sharps `F#`, flats `Bb` (both work in every octave)
+- leave out the `-` that noobnotes puts between notes
 
 **Common help requests:**
 
-- *"It plays the wrong tune"* — Check note names are spelled correctly with quotes: `'C4'`, not `C4`.
-- *"It beeps constantly"* — The buzzer pin was left LOW. The `play_melody()` function ends with `buzzer.value(1)` — make sure that line is present.
+- *"A note doesn't play"* — Thonny's bottom panel shows `Unknown note: ...`. Usually it's a lowercase letter (`^d` → `^D`) or a copied `-`.
+- *"It plays the wrong tune"* — Check that each note keeps its symbol from noobnotes (`^D` is not `D`) and has quotes: `'^D'`, not `^D`.
+- *"It beeps constantly"* — The buzzer pin was left LOW. The `play_melody()` function ends with `buzzer.value(1)`. Make sure that line is present.
 - *"My song is too fast/slow"* — Adjust the duration values: `0.2` = short, `0.4` = medium, `0.6` = long.
-- *"KeyError: 'C#4'"* — Sharps are not in the NOTES dict. Suggest using `'C4'` or `'D4'` instead.
 
 ### Exercise 3 — WiFi Robot
 
