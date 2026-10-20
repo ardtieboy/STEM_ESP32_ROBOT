@@ -39,17 +39,8 @@ blue_zone = framebuf.FrameBuffer(memoryview(oled.buffer)[256:], 128, 48, framebu
 robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 ```
 
-**Note notation (musical buzzer):** Single letters, no octave number needed.
-Uppercase = octave 4, lowercase = octave 5.
-```python
-NOTES = {
-    'C': 262, 'D': 294, 'E': 330, 'F': 349,
-    'G': 392, 'A': 440, 'B': 494,
-    'c': 523, 'd': 587, 'e': 659, 'f': 698,
-    'g': 784, 'a': 880,
-    '_': 0,
-}
-```
+**Note notation (musical buzzer):** noobnotes.net's own notation, so pupils copy notes literally.
+`.C` = octave 3 (low), `C` = octave 4, `^C` = octave 5 (high), `*C` = octave 6 (very high), sharps `C#`, flats `Db` (aliases generated from the sharps), `_` = rest. Always capitals; noobnotes' `-` joiners are left out. `play()` prints `Unknown note:` instead of crashing on a typo.
 
 **Non-blocking WiFi server pattern (wifi robot):**
 - `srv.setblocking(False)` — accept() raises OSError when idle, eyes keep animating
@@ -65,7 +56,7 @@ NOTES = {
 | `main` | Welcome screen (`NAME = "<NAME>"`, pupils fill in their name as warm-up), WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg |
 | `robo_eyes_exercise` | OLED eyes, single `EMOTION = DEFAULT` to change; button `if` lines pre-typed but commented out in the loop |
 | `robo_eyes_solution` | Full solution: `PRESSED = 0`, `EMOTION_1 = HAPPY`, `EMOTION_2 = ANGRY` |
-| `musical_buzzer_exercise` | 3 tasks: change beep note, guess/replace mystery song, wire up buttons with `pass` placeholders |
+| `musical_buzzer_exercise` | 3 tasks: wire up buttons (`pass` placeholders), change beep note, guess/replace mystery song |
 | `musical_buzzer_solution` | Full solution with Let It Go (Frozen) as default melody |
 | `wifi_robot_exercise` | Gaps: `WIFI_NAME`, two `XXX` entries in MOODS dict |
 | `wifi_robot_solution` | Complete WiFi robot with mood control webpage |
@@ -78,8 +69,8 @@ NOTES = {
 ## Exercise structure decisions
 
 - **Exercise 1 (robo_eyes):** Two parts — Part 1: choose one emotion (in code), Part 2: students type the button setup (`button1/2`, `PRESSED = ???` → 0, `EMOTION_1/2`) above the main loop, then remove the `#` from the pre-typed `if` lines in the loop. The lines are pre-typed to avoid Thonny auto-indent mistakes, and commented so Part 1 runs without NameErrors.
-- **Exercise 2 (musical_buzzer):** Three tasks in code: (1) pick beep note via `BEEP_NOTE`, (2) guess mystery song then replace `MY_MELODY` with own song from noobnotes.net, (3) replace `pass` with correct function call in the loop.
-- **Note naming:** Single letters only — no octave numbers. Students copy letters directly from noobnotes.net. Lowercase = higher octave.
+- **Exercise 2 (musical_buzzer):** Three tasks in code: (1) replace `pass` with the correct function call in the loop (first, so the buttons work and tasks 2–3 can be heard), (2) pick beep note via `BEEP_NOTE`, (3) guess mystery song then replace `MY_MELODY` with own song from noobnotes.net.
+- **Note naming:** noobnotes notation exactly (`.C C ^C *C`, `#`, `b`). This replaced the earlier 'lowercase = higher octave' rule on 2026-10-20 because noobnotes never uses lowercase.
 - **Mystery song:** Let It Go (Frozen) — no title or lyric comments in code so pupils guess.
 
 ## Repo
