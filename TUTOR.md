@@ -275,23 +275,29 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 
 ### Exercise 4 (optional) — A hat for the robot
 
-**What students do:** Measure the robot, build a hat in Tinkercad from a cylinder brim and top, decorate it, and export an `.STL` named after themselves.
+**What students do:** Measure the robot, build a hat in Tinkercad from a cylinder brim and top, decorate it, put the ready-made peg under it, and export an `.STL` named after themselves.
+
+**The peg:** `hat_peg.stl` (in the repo, on every branch) is a plus-shaped peg that press-fits into the hole on top of the robot's face. Its outline is a Ø5.1 mm circle with a 0.2 mm press-fit offset (Ø5.3 mm), plus two 6.19 × 2.58 mm rectangles with R0.5 outer corners. It is 5.5 mm high: 5 mm sticks out under the hat and 0.5 mm sinks into it, so the two fuse when grouped. Pupils import it rather than build it, because Tinkercad shapes don't hold these tolerances. To change the fit, edit the numbers at the top of `scripts/make_hat_peg.py`, run it, and commit the new `hat_peg.stl` on `main`.
 
 **Key concept:** Real objects start as 3D models made from simple shapes. The printer builds them layer by layer, which is why the printer rules exist.
 
 **Collecting the files:** a USB stick going round, or a shared folder. Pupils name the design after themselves (Step 5), so the `.STL` files are easy to tell apart.
 
 **Printing:**
-- PLA, 0.2 mm layers, 15% infill, brim side down on the bed. With a flat bottom no supports are needed, except under parts that stick out sideways (a pompom on a long stick, a sideways star)
+- PLA, 0.2 mm layers, 15% infill
+- If the top of the hat is flat, print it **upside down**: top on the bed, peg pointing up. No supports needed, and the peg comes out cleanest, which matters for the press fit
+- Otherwise print peg down, with supports under the brim. Elephant's foot on the first layers can make the peg too tight: sand it lightly
+- Print one test hat before the workshop and check that it clicks into a robot
 - Tinkercad exports in mm. If a hat comes in tiny or huge in the slicer, the scale is off. Check it's about 50 mm wide
 - A 50 × 50 × 40 mm hat takes roughly 30–60 min. Put several hats on one plate and print after the workshop, then hand them out next session
-- Fix the hat to the robot with Blu-Tack or double-sided tape
 
 **Common help requests:**
 
 - *"My hat disappeared"* — It's under the grid or the view is zoomed far out. Press **F** (fit all), or use the **Home** icon next to the view cube.
 - *"Part of my hat is floating"* — Select it and press **D** to drop it onto the grid, or move it down with the arrow keys until it touches.
 - *"Only part of my hat moves"* — The parts aren't grouped. Ctrl+A, then Ctrl+G.
+- *"The peg is inside my hat"* — The hat wasn't lifted, or they clicked the vertical Align dot. Ungroup (Ctrl+Shift+G), lift the hat 5 mm with Ctrl+↑, and align only on the two flat lines.
+- *"I can't find hat_peg.stl"* — It's in the cloned `STEM_ESP32_ROBOT` folder in their home folder.
 - *"I can't log in"* — They clicked the normal login. It must be *Students, join your class* with the class code.
 
 ---
