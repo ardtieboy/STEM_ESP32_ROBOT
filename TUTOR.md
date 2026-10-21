@@ -275,7 +275,7 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 
 ### Exercise 4 (optional) — A hat for the robot
 
-**What students do:** Measure the robot's head, import the ready-made peg and centre it under a half-sphere dome, add a cylinder brim, decorate it, and export an `.STL` named after themselves. The reference result is the yellow builder's helmet. Any design is fine as long as the peg is there, centred, and unchanged.
+**What students do:** Measure the robot's head, import the ready-made peg and centre it under a half-sphere dome, add a cylinder brim, decorate it, and export an `.STL` named after themselves. The reference result is the yellow builder's helmet (`hat_example.jpg`, shown in the handout). Any design is fine as long as the peg is there, centred, and unchanged.
 
 **Why the peg goes on first:** Align centres on the bounding box of the selection. If pupils add the peg last, an off-centre brim or decoration pulls the peg off-centre. Grouping the peg with the symmetric dome first locks it in the middle.
 
