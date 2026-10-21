@@ -357,17 +357,19 @@ Your tutor can switch you to `wifi_robot_solution`.
 
 ---
 
-## Exercise 4 (optional) — A hat for your robot 🎩
+## Exercise 4 (optional) — A hat for your robot ⛑️
 
 No code this time! You design a hat in 3D on the computer, and your tutor 3D prints it for real.
 
 ### What you will build
 
-A small hat that sits on top of your robot. A top hat, a crown, a cap with your name on it… you choose! Under the hat there is a small **peg** shaped like a plus (**+**). It clicks into the hole on top of your robot's face, so the hat stays on.
+A hat that clicks onto your robot's head. The example is a yellow builder's helmet, but you can make anything: a crown, a cap, a wizard hat, a hat with your name on it.
+
+Under every hat is a small **peg** shaped like a plus (**+**). It clicks into the hole on top of your robot's head, so the hat stays on. Be as creative as you like, as long as the peg is there.
 
 ### Step 1 — Measure your robot
 
-Take a ruler and measure how wide the top of your robot is, in **millimetres** (mm). Write it down. Your hat shouldn't be much wider than that.
+Take a ruler and measure how wide the top of your robot's head is, in **millimetres** (mm). Write it down. We call it **your number**.
 
 ### Step 2 — Open Tinkercad
 
@@ -377,38 +379,39 @@ Take a ruler and measure how wide the top of your robot is, in **millimetres** (
 
 **Moving around:** drag with the **right** mouse button to turn the view, scroll to zoom. Made a mistake? **Ctrl+Z** undoes it.
 
-### Step 3 — Build a basic top hat
+**Changing the size of a shape:** click the shape, then click one of the small white squares on its sides and type the number.
 
-1. From **Basic Shapes** on the right, drag a **Cylinder** onto the blue grid. This is the brim.
-2. Click it. Click the small white squares on its sides and type the size: **40** wide, **40** long, **2** high.
-3. Drag a second **Cylinder** onto the grid for the top of the hat. Make it **25** wide, **25** long, **20** high.
-4. Put the top on the brim: select both shapes (drag a box around them), click **Align** (or press **L**), and click the middle dot on both lines so they are centred.
-5. With both still selected, click **Group** (or press **Ctrl+G**). Now the hat is one piece.
-
-> Use your own numbers from Step 1! If your robot is 30 mm wide, make the brim about 30.
-
-### Step 4 — Make it yours
-
-Add things on top or around it: a **Star**, a **Heart**, a **Sphere** as a pompom, or **Text** with your name. Every shape has colours too, but the printer prints in one colour.
-
-Follow these **printer rules**, or your hat won't print well:
-
-- **Not too big:** at most **50 × 50 mm**, and **40 mm** high (without the peg). A bigger hat takes hours to print.
-- **Flat bottom:** the bottom of the hat is flat. Only the peg (Step 5) sticks out under it.
-- **Nothing floating:** every part touches another part. A star floating in the air falls off.
-- **Not too thin:** walls and letters at least **2 mm** thick.
-
-### Step 5 — Add the peg
+### Step 3 — Start with the peg and the dome
 
 The peg is ready-made. Don't build it yourself: it has to be exactly the right size to click into your robot.
 
-1. Select everything (**Ctrl+A**) and **Group** it (**Ctrl+G**).
-2. Lift the hat up: keep it selected and press **Ctrl+↑** (Ctrl and the up arrow) **5 times**. The hat now floats 5 mm above the grid.
-3. Click **Import** (top right) → **Choose a file**. Open the **STEM_ESP32_ROBOT** folder, pick **hat_peg.stl**, and click **Import**. A small grey **+** appears on the grid.
-4. Put the peg under the middle of the hat: select the hat and the peg (drag a box around both), click **Align** (or press **L**), and click the middle dot on the two lines that lie **flat** on the grid. Don't click the dots on the standing line, or the peg moves up into the hat.
+1. Click **Import** (top right) → **Choose a file**. Open the **STEM_ESP32_ROBOT** folder, pick **hat_peg.stl**, and click **Import**. A small grey **+** appears on the grid.
+2. From **Basic Shapes** on the right, drag a **Half Sphere** onto the grid. This is the top of the helmet. Make it **your number** wide, **your number** long, and **half your number** high. (Your number is 50? Then 50, 50 and 25.)
+3. Lift the dome up: keep it selected and press **Ctrl+↑** (Ctrl and the up arrow) **5 times**. It now floats 5 mm above the grid.
+4. Put the peg under the middle of the dome: select both (drag a box around them), click **Align** (or press **L**), and click the middle dot on the two lines that lie **flat** on the grid. Don't click the dots on the standing line.
 5. With both still selected, **Group** them (**Ctrl+G**).
 
 > Don't make the peg bigger or smaller! If it changes size, the hat won't fit on your robot.
+
+### Step 4 — Add the brim
+
+1. Drag a **Cylinder** onto the grid. Make it **your number + 15** wide and long, and **2** high. (50 + 15 = 65.)
+2. Lift it **5 mm** too: **Ctrl+↑** 5 times.
+3. Select the brim and the dome, click **Align**, and click the middle dot on the two flat lines again. Now the brim is right under the dome.
+4. Want a builder's helmet with a peak at the front? Click only the brim and press the arrow key a few times to slide it forward.
+
+### Step 5 — Make it yours
+
+Add things to your hat: a **Star**, a **Heart**, a **Sphere** as a pompom, a **Box** as a peak, or **Text** with your name. If you drag a shape onto the hat, it sticks to it. Every shape has colours too, but the printer prints in one colour.
+
+Follow these **printer rules**, or your hat won't print well:
+
+- **Leave the peg alone:** the peg is the only thing below the brim, and it stays in the middle.
+- **Not too big:** at most **your number + 20** wide and long, and **40 mm** high.
+- **Nothing floating:** every part touches another part. A star floating in the air falls off.
+- **Not too thin:** walls and letters at least **2 mm** thick.
+
+When you're done, select everything (**Ctrl+A**) and **Group** it (**Ctrl+G**).
 
 ### Step 6 — Send it to the printer
 
@@ -416,7 +419,7 @@ The peg is ready-made. Don't build it yourself: it has to be exactly the right s
 2. Click **Export** (top right) → **.STL**.
 3. Give the file to your tutor.
 
-✅ **It worked if:** when you drag your hat, all parts move together, and when you turn the view to look from below, the **+** peg sticks out in the middle of the bottom of the hat.
+✅ **It worked if:** when you drag your hat, all parts move together, and when you turn the view to look from below, the **+** peg sticks out in the middle of the dome.
 
 Printing takes a while, so you'll probably get your hat at the next session.
 
