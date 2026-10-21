@@ -61,7 +61,7 @@ robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 | `wifi_robot_exercise` | Gaps: `WIFI_NAME` (default `'Robot-' + BOARD_ID`, unique per board via `unique_id()`, shown on the yellow strip), two `XXX` entries in MOODS dict |
 | `wifi_robot_solution` | Complete WiFi robot with mood control webpage |
 
-**Doc sync (automatic):** WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg, CLAUDE.md and hat_peg.stl live on `main`. Only edit them on `main`. The `.githooks/post-commit` hook copies them to all six exercise/solution branches after each commit on `main`, adding a "Sync docs from main" commit where something changed. It uses git plumbing, so no checkout happens and the working tree is untouched.
+**Doc sync (automatic):** WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg, CLAUDE.md, hat_peg.stl and hat_example.jpg live on `main`. Only edit them on `main`. The `.githooks/post-commit` hook copies them to all six exercise/solution branches after each commit on `main`, adding a "Sync docs from main" commit where something changed. It uses git plumbing, so no checkout happens and the working tree is untouched.
 - Enable once per clone: `git config core.hooksPath .githooks`
 - The hook does not push. Publish everything with `git push origin main robo_eyes_exercise robo_eyes_solution musical_buzzer_exercise musical_buzzer_solution wifi_robot_exercise wifi_robot_solution`
 - To add a synced file or branch, edit `FILES` / `BRANCHES` at the top of the hook.
