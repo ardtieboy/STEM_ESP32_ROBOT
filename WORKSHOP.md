@@ -371,11 +371,9 @@ You can make anything: a crown, a cap, a wizard hat, a hat with your name on it.
 
 Under every hat is a small **peg** shaped like a plus (**+**). It clicks into the hole on top of your robot's head, so the hat stays on. Be as creative as you like, as long as the peg is there.
 
-### Step 1 — Measure your robot
+Your robot's head is a cube of **45 mm** (millimetres) on each side. All sizes below are in mm.
 
-Take a ruler and measure how wide the top of your robot's head is, in **millimetres** (mm). Write it down. We call it **your number**.
-
-### Step 2 — Open Tinkercad
+### Step 1 — Open Tinkercad
 
 1. Open a web browser and go to **tinkercad.com**
 2. Click **Log in** → **Students, join your class** and type the **class code** your tutor gives you, then your nickname
@@ -385,39 +383,39 @@ Take a ruler and measure how wide the top of your robot's head is, in **millimet
 
 **Changing the size of a shape:** click the shape, then click one of the small white squares on its sides and type the number.
 
-### Step 3 — Start with the peg and the dome
+### Step 2 — Start with the peg and the dome
 
 The peg is ready-made. Don't build it yourself: it has to be exactly the right size to click into your robot.
 
 1. Click **Import** (top right) → **Choose a file**. Open the **STEM_ESP32_ROBOT** folder, pick **hat_peg.stl**, and click **Import**. A small grey **+** appears on the grid.
-2. From **Basic Shapes** on the right, drag a **Half Sphere** onto the grid. This is the top of the helmet. Make it **your number** wide, **your number** long, and **half your number** high. (Your number is 50? Then 50, 50 and 25.)
-3. Lift the dome up: keep it selected and press **Ctrl+↑** (Ctrl and the up arrow) **5 times**. It now floats 5 mm above the grid.
+2. From **Basic Shapes** on the right, drag a **Half Sphere** onto the grid. This is the top of the helmet. Make it **45** wide, **45** long and **22.5** high.
+3. Lift the dome up: keep it selected and press **Ctrl+↑** (Ctrl and the up arrow) **4 times**. It now floats 4 mm above the grid.
 4. Put the peg under the middle of the dome: select both (drag a box around them), click **Align** (or press **L**), and click the middle dot on the two lines that lie **flat** on the grid. Don't click the dots on the standing line.
 5. With both still selected, **Group** them (**Ctrl+G**).
 
 > Don't make the peg bigger or smaller! If it changes size, the hat won't fit on your robot.
 
-### Step 4 — Add the brim
+### Step 3 — Add the brim
 
-1. Drag a **Cylinder** onto the grid. Make it **your number + 15** wide and long, and **2** high. (50 + 15 = 65.)
-2. Lift it **5 mm** too: **Ctrl+↑** 5 times.
+1. Drag a **Cylinder** onto the grid. Make it **60** wide, **60** long and **2** high.
+2. Lift it **4 mm** too: **Ctrl+↑** 4 times.
 3. Select the brim and the dome, click **Align**, and click the middle dot on the two flat lines again. Now the brim is right under the dome.
 4. Want a builder's helmet with a peak at the front? Click only the brim and press the arrow key a few times to slide it forward.
 
-### Step 5 — Make it yours
+### Step 4 — Make it yours
 
 Add things to your hat: a **Star**, a **Heart**, a **Sphere** as a pompom, a **Box** as a peak, or **Text** with your name. If you drag a shape onto the hat, it sticks to it. Every shape has colours too, but the printer prints in one colour.
 
 Follow these **printer rules**, or your hat won't print well:
 
 - **Leave the peg alone:** the peg is the only thing below the brim, and it stays in the middle.
-- **Not too big:** at most **your number + 20** wide and long, and **40 mm** high.
+- **Not too big:** at most **65** wide and long, and **40** high.
 - **Nothing floating:** every part touches another part. A star floating in the air falls off.
 - **Not too thin:** walls and letters at least **2 mm** thick.
 
 When you're done, select everything (**Ctrl+A**) and **Group** it (**Ctrl+G**).
 
-### Step 6 — Send it to the printer
+### Step 5 — Send it to the printer
 
 1. Click the name at the top left (like *Brilliant Blorr*) and change it to your own name.
 2. Click **Export** (top right) → **.STL**.
