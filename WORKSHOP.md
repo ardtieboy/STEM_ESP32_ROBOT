@@ -320,10 +320,12 @@ Open **main.py** from the ESP32 (bottom panel).
 **Step 1 — Give your robot a WiFi name:**
 
 ```python
-WIFI_NAME = 'STEM-Club'    # <-- change this!
+WIFI_NAME = 'Robot-' + BOARD_ID    # <-- change this!
 ```
 
-Pick something creative. This is the network name people see on their phone.
+Replace `Robot-` with your own name, for example `'Sam-'`. This is the network name people see on their phone. `BOARD_ID` adds 4 letters and numbers that only your board has, so nobody else in the room gets the same name. Your robot's WiFi name will be something like **Sam-3fa9**.
+
+> ⚠️ Only change the text between the quotes `' '`. Use letters, numbers and `-` only. No apostrophes: `'Sam's robot'` breaks the code!
 
 **Step 2 — Fill in the missing emotions:**
 
@@ -341,10 +343,11 @@ Replace `XXX` with the correct emotion from Exercise 1.
 
 **Step 3 — Test it:**
 
-1. Save and restart
-2. On your phone, go to **WiFi settings** and connect to your robot's network (password: `12345678`)
-3. Open a browser and go to **192.168.4.1**
-4. Tap the mood buttons and watch the eyes change!
+1. Save and restart. Your robot's WiFi name now shows in the **yellow strip** at the top of the screen.
+2. On your phone, go to **WiFi settings** and tap the name from the yellow strip. Password: `12345678`.
+3. Does your phone say **"No internet"**? That's normal: the robot isn't connected to the internet. Tap **Stay connected** (or **Keep** / **Yes**). If the phone keeps switching away, turn off **mobile data**.
+4. Open a browser. Tap the **address bar at the very top** (not a Google search box) and type exactly: **http://192.168.4.1**
+5. Tap the mood buttons and watch the eyes change!
 
 ### Stuck?
 
