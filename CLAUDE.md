@@ -4,7 +4,7 @@ This file helps Claude pick up context across sessions.
 
 ## Project goal
 
-A children's STEM workshop teaching MicroPython on ESP32 boards. Three coding exercises (robot eyes, musical buzzer, WiFi robot) plus an optional Exercise 4 without code: pupils design a hat for their robot in Tinkercad (class code login, export `.STL`), which tutors 3D print afterwards. Exercise 4 has no branch; it lives only in WORKSHOP.md and TUTOR.md. Pupils import the ready-made `hat_peg.stl` (plus-shaped press-fit peg, 5 mm out) under their hat; regenerate it with `scripts/make_hat_peg.py`.
+A children's STEM workshop teaching MicroPython on ESP32 boards. Three coding exercises (robot eyes, musical buzzer, WiFi robot) plus an optional Exercise 4 without code: pupils design a hat for their robot in Tinkercad (class code login, export `.STL`), which tutors 3D print afterwards. Exercise 4 has no branch; it lives only in WORKSHOP.md and TUTOR.md. Pupils import the ready-made `hat_peg.stl` (plus-shaped press-fit peg, 4 mm out; head is a 45 mm cube with a Ø5.1 mm, 5 mm deep plus-shaped hole) under their hat; regenerate it with `scripts/make_hat_peg.py`.
 
 ## Hardware
 
