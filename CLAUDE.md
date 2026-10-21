@@ -4,7 +4,7 @@ This file helps Claude pick up context across sessions.
 
 ## Project goal
 
-A children's STEM workshop teaching MicroPython on ESP32 boards. Three coding exercises (robot eyes, musical buzzer, WiFi robot) plus a 3D modelling session requiring no code.
+A children's STEM workshop teaching MicroPython on ESP32 boards. Three coding exercises (robot eyes, musical buzzer, WiFi robot) plus an optional Exercise 4 without code: pupils design a hat for their robot in Tinkercad (class code login, export `.STL`), which tutors 3D print afterwards. Exercise 4 has no branch; it lives only in WORKSHOP.md and TUTOR.md.
 
 ## Hardware
 
