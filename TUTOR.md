@@ -34,7 +34,7 @@ Students receive a pre-wired ESP32 board and work through three coding exercises
 | Robot Eyes | `robo_eyes_exercise` | `robo_eyes_solution` | ~25 min |
 | Musical Buzzer | `musical_buzzer_exercise` | `musical_buzzer_solution` | ~25 min |
 | WiFi Robot | `wifi_robot_exercise` | `wifi_robot_solution` | ~30 min |
-| Robot Hat (optional, Tinkercad) | — | — | ~30–40 min, if time allows |
+| Robot Hat (optional, Tinkercad) | — | — | ~45–60 min, if time allows |
 
 ---
 
@@ -275,11 +275,11 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 
 ### Exercise 4 (optional) — A hat for the robot
 
-**What students do:** Measure the robot's head, import the ready-made peg and centre it under a half-sphere dome, add a cylinder brim, decorate it, and export an `.STL` named after themselves. The reference result is the yellow builder's helmet (`hat_example.jpg`, shown in the handout). Any design is fine as long as the peg is there, centred, and unchanged.
+**What students do:** Import the ready-made peg and centre it under a half-sphere dome, add a cylinder brim, decorate it, and export an `.STL` named after themselves. The reference result is the yellow builder's helmet (`hat_example.jpg`, shown in the handout). Any design is fine as long as the peg is there, centred, and unchanged.
 
 **Why the peg goes on first:** Align centres on the bounding box of the selection. If pupils add the peg last, an off-centre brim or decoration pulls the peg off-centre. Grouping the peg with the symmetric dome first locks it in the middle.
 
-**The peg:** `hat_peg.stl` (in the repo, on every branch) is a plus-shaped peg that press-fits into the hole on top of the robot's head. Its outline is a Ø5.1 mm circle with a 0.2 mm press-fit offset (Ø5.3 mm), plus two 6.19 × 2.58 mm rectangles with R0.5 outer corners. It is 5.5 mm high: 5 mm sticks out under the hat and 0.5 mm sinks into it, so the two fuse when grouped. Pupils import it rather than build it, because Tinkercad shapes don't hold these tolerances. To change the fit, edit the numbers at the top of `scripts/make_hat_peg.py`, run it, and commit the new `hat_peg.stl` on `main`.
+**The peg:** `hat_peg.stl` (in the repo, on every branch) is a plus-shaped peg that press-fits into the hole on top of the robot's head. Its outline is a Ø5.1 mm circle with a 0.2 mm press-fit offset (Ø5.3 mm), plus two 6.19 × 2.58 mm rectangles with R0.5 outer corners. It is 4.5 mm high: pupils lift the dome 4 mm, so 4 mm sticks out under the hat and 0.5 mm sinks into it, and the two fuse when grouped. The hole in the head (`desk robot.3mf`, 45 mm cube) is Ø5.1 mm with 6.70 × 3.19 mm arms and 5.0 mm deep, with a 0.87 mm chamfer at the top. So the round part grips, the arms only stop the hat turning, and the 1 mm left at the bottom means the hat always sits flat on the head, even with a squashed first layer or a bit of support left on the tip. The protrusion is set by how far pupils lift the dome, not by the file: Ctrl+↑ moves 1 mm per press, so 4 mm is the nearest whole step under the 5 mm depth. Pupils import it rather than build it, because Tinkercad shapes don't hold these tolerances. To change the fit, edit the numbers at the top of `scripts/make_hat_peg.py`, run it, and commit the new `hat_peg.stl` on `main`.
 
 **Key concept:** Real objects start as 3D models made from simple shapes. The printer builds them layer by layer, which is why the printer rules exist.
 
@@ -298,7 +298,7 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 - *"My hat disappeared"* — It's under the grid or the view is zoomed far out. Press **F** (fit all), or use the **Home** icon next to the view cube.
 - *"Part of my hat is floating"* — Select it and press **D** to drop it onto the grid, or move it down with the arrow keys until it touches.
 - *"Only part of my hat moves"* — The parts aren't grouped. Ctrl+A, then Ctrl+G.
-- *"The peg is inside my hat"* — The dome or brim wasn't lifted 5 mm, or they clicked the vertical Align dot. Ungroup (Ctrl+Shift+G), lift the dome and brim with Ctrl+↑ 5 times, and align only on the two flat lines.
+- *"The peg is inside my hat"* — The dome or brim wasn't lifted 4 mm, or they clicked the vertical Align dot. Ungroup (Ctrl+Shift+G), lift the dome and brim with Ctrl+↑ 4 times, and align only on the two flat lines.
 - *"The peg isn't in the middle"* — They aligned the peg with the whole hat instead of the dome alone. Ungroup back to the dome, align the peg with the dome, group, then re-add the brim.
 - *"I can't find hat_peg.stl"* — It's in the cloned `STEM_ESP32_ROBOT` folder in their home folder.
 - *"I can't log in"* — They clicked the normal login. It must be *Students, join your class* with the class code.
