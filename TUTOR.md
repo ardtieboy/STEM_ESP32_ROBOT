@@ -250,13 +250,14 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 **Key concept:** The ESP32 acts as a small web server. Any device on the same WiFi can send it requests.
 
 **Connecting to the robot's WiFi:**
-- Network name: whatever the student set as `WIFI_NAME`
+- Network name: shown in the yellow strip of the board's screen. It's the pupil's name + 4 characters from the board's unique ID (default `Robot-xxxx`), so every board in the room is different and the name stays the same after a restart
 - Password: `12345678`
 - URL: `192.168.4.1`
 
 **Common help requests:**
 
-- *"I can't find the WiFi network"* — Board may not have uploaded yet, or the board reset. Upload again and wait 5 seconds.
+- *"I can't find the WiFi network"* — Look at the yellow strip and search for exactly that name. If the strip is empty, the code stopped before the screen started (usually the `XXX` gaps). Fix the gaps, upload again and wait 5 seconds.
+- *"SyntaxError on the WIFI_NAME line"* — Usually an apostrophe in the name (`'Sam's robot'`). Remove it.
 - *"The page won't load"* — Make sure the device is connected to the robot's WiFi, not the school network. Try disabling mobile data.
 - *"NameError: XXX"* — They left the `XXX` placeholder in the code without replacing it. Walk them through the two spots that need filling in.
 - *"The page loads but mood buttons do nothing"* — The `MOODS` dict may have a wrong emotion name. Check case and spelling.
