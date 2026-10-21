@@ -363,7 +363,11 @@ No code this time! You design a hat in 3D on the computer, and your tutor 3D pri
 
 ### What you will build
 
-A hat that clicks onto your robot's head. The example is a yellow builder's helmet, but you can make anything: a crown, a cap, a wizard hat, a hat with your name on it.
+A hat that clicks onto your robot's head. Here is an example, a yellow builder's helmet:
+
+<img src="hat_example.jpg" alt="The robot wearing a yellow 3D-printed builder's helmet" width="260">
+
+You can make anything: a crown, a cap, a wizard hat, a hat with your name on it.
 
 Under every hat is a small **peg** shaped like a plus (**+**). It clicks into the hole on top of your robot's head, so the hat stays on. Be as creative as you like, as long as the peg is there.
 
