@@ -27,14 +27,14 @@ Then walk them through opening Thonny and the **Warm-up** in WORKSHOP.md: replac
 
 ## Overview
 
-Students receive a pre-wired ESP32 board and work through three coding exercises in Python. The workshop is structured so that each exercise has a ready-made solution branch — students who fall behind can switch to it and keep up with the group.
+Students receive a pre-wired ESP32 board and work through three coding exercises in Python, plus an optional fourth without code: designing a hat for their robot in Tinkercad, which you 3D print afterwards. The workshop is structured so that each exercise has a ready-made solution branch — students who fall behind can switch to it and keep up with the group.
 
 | Exercise | Branch (exercise) | Branch (solution) | Duration |
 |----------|-------------------|-------------------|----------|
 | Robot Eyes | `robo_eyes_exercise` | `robo_eyes_solution` | ~25 min |
 | Musical Buzzer | `musical_buzzer_exercise` | `musical_buzzer_solution` | ~25 min |
 | WiFi Robot | `wifi_robot_exercise` | `wifi_robot_solution` | ~30 min |
-| 3D Modelling | — | — | if time allows |
+| Robot Hat (optional, Tinkercad) | — | — | ~30–40 min, if time allows |
 
 ---
 
@@ -65,6 +65,16 @@ Verify it launches and can detect a connected ESP32:
 > sudo usermod -aG dialout $USER
 > ```
 > A logout/login is required for this to take effect.
+
+### Tinkercad class for Exercise 4 (optional)
+
+Exercise 4 runs in the browser at tinkercad.com, so nothing to install. Pupils under 13 can't make their own account, so set up a class:
+
+1. Log in to tinkercad.com with your teacher account → **Classes** → **Create class**
+2. Add one **nickname** per pupil (first names are fine)
+3. Write the **class code** on the board. Pupils join with *Log in → Students, join your class*, the code and their nickname
+
+Check that tinkercad.com loads on the school network before the day.
 
 ### Clone the workshop repo on every student computer
 
@@ -262,6 +272,27 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 - *"NameError: XXX"* — They left the `XXX` placeholder in the code without replacing it. Walk them through the two spots that need filling in.
 - *"The page loads but mood buttons do nothing"* — The `MOODS` dict may have a wrong emotion name. Check case and spelling.
 - *"Pressing Play Song freezes the page"* — Normal behaviour — the board is playing the melody and can't accept requests during that time. The overlay should appear; the page resumes after the song.
+
+### Exercise 4 (optional) — A hat for the robot
+
+**What students do:** Measure the robot, build a hat in Tinkercad from a cylinder brim and top, decorate it, and export an `.STL` named after themselves.
+
+**Key concept:** Real objects start as 3D models made from simple shapes. The printer builds them layer by layer, which is why the printer rules exist.
+
+**Collecting the files:** a USB stick going round, or a shared folder. Pupils name the design after themselves (Step 5), so the `.STL` files are easy to tell apart.
+
+**Printing:**
+- PLA, 0.2 mm layers, 15% infill, brim side down on the bed. With a flat bottom no supports are needed, except under parts that stick out sideways (a pompom on a long stick, a sideways star)
+- Tinkercad exports in mm. If a hat comes in tiny or huge in the slicer, the scale is off. Check it's about 50 mm wide
+- A 50 × 50 × 40 mm hat takes roughly 30–60 min. Put several hats on one plate and print after the workshop, then hand them out next session
+- Fix the hat to the robot with Blu-Tack or double-sided tape
+
+**Common help requests:**
+
+- *"My hat disappeared"* — It's under the grid or the view is zoomed far out. Press **F** (fit all), or use the **Home** icon next to the view cube.
+- *"Part of my hat is floating"* — Select it and press **D** to drop it onto the grid, or move it down with the arrow keys until it touches.
+- *"Only part of my hat moves"* — The parts aren't grouped. Ctrl+A, then Ctrl+G.
+- *"I can't log in"* — They clicked the normal login. It must be *Students, join your class* with the class code.
 
 ---
 
