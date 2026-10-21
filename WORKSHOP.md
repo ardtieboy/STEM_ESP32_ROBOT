@@ -363,7 +363,7 @@ No code this time! You design a hat in 3D on the computer, and your tutor 3D pri
 
 ### What you will build
 
-A small hat that sits on top of your robot. A top hat, a crown, a cap with your name on it… you choose!
+A small hat that sits on top of your robot. A top hat, a crown, a cap with your name on it… you choose! Under the hat there is a small **peg** shaped like a plus (**+**). It clicks into the hole on top of your robot's face, so the hat stays on.
 
 ### Step 1 — Measure your robot
 
@@ -393,19 +393,30 @@ Add things on top or around it: a **Star**, a **Heart**, a **Sphere** as a pompo
 
 Follow these **printer rules**, or your hat won't print well:
 
-- **Not too big:** at most **50 × 50 mm**, and **40 mm** high. A bigger hat takes hours to print.
-- **Flat bottom:** the bottom of the hat sits flat on the blue grid.
+- **Not too big:** at most **50 × 50 mm**, and **40 mm** high (without the peg). A bigger hat takes hours to print.
+- **Flat bottom:** the bottom of the hat is flat. Only the peg (Step 5) sticks out under it.
 - **Nothing floating:** every part touches another part. A star floating in the air falls off.
 - **Not too thin:** walls and letters at least **2 mm** thick.
 
-### Step 5 — Send it to the printer
+### Step 5 — Add the peg
+
+The peg is ready-made. Don't build it yourself: it has to be exactly the right size to click into your robot.
 
 1. Select everything (**Ctrl+A**) and **Group** it (**Ctrl+G**).
-2. Click the name at the top left (like *Brilliant Blorr*) and change it to your own name.
-3. Click **Export** (top right) → **.STL**.
-4. Give the file to your tutor.
+2. Lift the hat up: keep it selected and press **Ctrl+↑** (Ctrl and the up arrow) **5 times**. The hat now floats 5 mm above the grid.
+3. Click **Import** (top right) → **Choose a file**. Open the **STEM_ESP32_ROBOT** folder, pick **hat_peg.stl**, and click **Import**. A small grey **+** appears on the grid.
+4. Put the peg under the middle of the hat: select the hat and the peg (drag a box around both), click **Align** (or press **L**), and click the middle dot on the two lines that lie **flat** on the grid. Don't click the dots on the standing line, or the peg moves up into the hat.
+5. With both still selected, **Group** them (**Ctrl+G**).
 
-✅ **It worked if:** when you drag your hat, all parts move together, and the hat stays on the blue grid.
+> Don't make the peg bigger or smaller! If it changes size, the hat won't fit on your robot.
+
+### Step 6 — Send it to the printer
+
+1. Click the name at the top left (like *Brilliant Blorr*) and change it to your own name.
+2. Click **Export** (top right) → **.STL**.
+3. Give the file to your tutor.
+
+✅ **It worked if:** when you drag your hat, all parts move together, and when you turn the view to look from below, the **+** peg sticks out in the middle of the bottom of the hat.
 
 Printing takes a while, so you'll probably get your hat at the next session.
 
