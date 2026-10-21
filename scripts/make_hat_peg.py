@@ -2,7 +2,7 @@
 """Generate hat_peg.stl: the plus-shaped peg under the robot hat (Exercise 4).
 
 Pupils import it in Tinkercad and put it under their hat. It press-fits into
-the hole on top of the robot's face. Profile (top view):
+the hole on top of the robot's head. Profile (top view):
   - circle, 5.1 mm + 0.2 mm press-fit offset = 5.3 mm diameter
   - plus two rectangles 6.19 x 2.58 mm forming a plus, outer corners R0.5
 The peg is extruded PEG_OUT + OVERLAP high: OVERLAP sinks into the hat so the
