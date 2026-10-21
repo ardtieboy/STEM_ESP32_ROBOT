@@ -1,16 +1,20 @@
 import network, socket, os
-from machine import Pin, I2C
+from machine import Pin, I2C, unique_id
 import framebuf, time
 import ssd1306
 from roboeyes import *
 
 BUILD_ID = ''.join('{:02x}'.format(b) for b in os.urandom(4))
 
+# Every board has its own ID, so every WiFi name in the room is different.
+BOARD_ID = ''.join('{:02x}'.format(b) for b in unique_id()[-2:])
+
 # -----------------------------------------------
-# EXERCISE 1: Give your robot a WiFi name!
-# Replace the text between the quotes below.
+# STEP 1: Give your robot a WiFi name!
+# Replace Robot- with your own name. Only change the
+# text between the quotes. No apostrophes (')!
 # -----------------------------------------------
-WIFI_NAME = 'STEM-Club'    # <-- change this!
+WIFI_NAME = 'Robot-' + BOARD_ID    # <-- change this!
 
 ap = network.WLAN(network.AP_IF)
 ap.active(True)
@@ -22,8 +26,8 @@ while not ap.active():
 buzzer = Pin(23, Pin.OUT, value=1)
 
 NOTES = {
-    'C4':262,'D4':294,'E4':330,'F4':349,'G4':392,'A4':440,'B4':494,
-    'C5':523,'D5':587,'E5':659,'F5':698,'G5':784,'_':0,
+    'C':262,'D':294,'E':330,'F':349,'G':392,'A':440,'B':494,
+    '^C':523,'^D':587,'^E':659,'^F':698,'^G':784,'_':0,
 }
 
 def _play_note(freq, duration):
@@ -44,9 +48,9 @@ def beep(freq=880, duration=0.08):
     _play_note(freq, duration)
 
 MELODY = [
-    ('C4',.3),('C4',.3),('G4',.3),('G4',.3),('A4',.3),('A4',.3),('G4',.5),
+    ('C',.3),('C',.3),('G',.3),('G',.3),('A',.3),('A',.3),('G',.5),
     ('_', .1),
-    ('F4',.3),('F4',.3),('E4',.3),('E4',.3),('D4',.3),('D4',.3),('C4',.6),
+    ('F',.3),('F',.3),('E',.3),('E',.3),('D',.3),('D',.3),('C',.6),
 ]
 
 def play_song():
@@ -60,7 +64,7 @@ oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 blue_zone = framebuf.FrameBuffer(memoryview(oled.buffer)[256:], 128, 48, framebuf.MONO_VLSB)
 
 # -----------------------------------------------
-# EXERCISE 2: Add the missing moods!
+# STEP 2: Add the missing moods!
 # The dictionary maps a name to an emotion.
 # Fill in the two missing ones (marked XXX).
 #
@@ -77,6 +81,7 @@ current = 'neutral'
 
 def on_show(r):
     oled.fill_rect(0, 0, 128, 16, 0)
+    oled.text(WIFI_NAME, 0, 4)   # WiFi name on the yellow strip
     oled.show()
 
 robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
