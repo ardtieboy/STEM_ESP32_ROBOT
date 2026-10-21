@@ -10,6 +10,8 @@ After that, you will build three things:
 2. **Musical Buzzer** — compose your own song and play it with a button
 3. **WiFi Robot** — control the robot from your phone over WiFi
 
+Finished early? There's an optional fourth one: **design a hat for your robot** and get it 3D printed!
+
 You will write code in **MicroPython** — a version of Python that runs on tiny computers like your ESP32. The boards are already set up and ready to go. No installation needed.
 
 ---
@@ -355,9 +357,57 @@ Your tutor can switch you to `wifi_robot_solution`.
 
 ---
 
-## Bonus — 3D Modelling 🖨️
+## Exercise 4 (optional) — A hat for your robot 🎩
 
-Finished early? Your tutor will show you how to design a case for your robot in 3D modelling software — and how that design gets printed into a real object.
+No code this time! You design a hat in 3D on the computer, and your tutor 3D prints it for real.
+
+### What you will build
+
+A small hat that sits on top of your robot. A top hat, a crown, a cap with your name on it… you choose!
+
+### Step 1 — Measure your robot
+
+Take a ruler and measure how wide the top of your robot is, in **millimetres** (mm). Write it down. Your hat shouldn't be much wider than that.
+
+### Step 2 — Open Tinkercad
+
+1. Open a web browser and go to **tinkercad.com**
+2. Click **Log in** → **Students, join your class** and type the **class code** your tutor gives you, then your nickname
+3. Click **Create** → **3D Design**
+
+**Moving around:** drag with the **right** mouse button to turn the view, scroll to zoom. Made a mistake? **Ctrl+Z** undoes it.
+
+### Step 3 — Build a basic top hat
+
+1. From **Basic Shapes** on the right, drag a **Cylinder** onto the blue grid. This is the brim.
+2. Click it. Click the small white squares on its sides and type the size: **40** wide, **40** long, **2** high.
+3. Drag a second **Cylinder** onto the grid for the top of the hat. Make it **25** wide, **25** long, **20** high.
+4. Put the top on the brim: select both shapes (drag a box around them), click **Align** (or press **L**), and click the middle dot on both lines so they are centred.
+5. With both still selected, click **Group** (or press **Ctrl+G**). Now the hat is one piece.
+
+> Use your own numbers from Step 1! If your robot is 30 mm wide, make the brim about 30.
+
+### Step 4 — Make it yours
+
+Add things on top or around it: a **Star**, a **Heart**, a **Sphere** as a pompom, or **Text** with your name. Every shape has colours too, but the printer prints in one colour.
+
+Follow these **printer rules**, or your hat won't print well:
+
+- **Not too big:** at most **50 × 50 mm**, and **40 mm** high. A bigger hat takes hours to print.
+- **Flat bottom:** the bottom of the hat sits flat on the blue grid.
+- **Nothing floating:** every part touches another part. A star floating in the air falls off.
+- **Not too thin:** walls and letters at least **2 mm** thick.
+
+### Step 5 — Send it to the printer
+
+1. Select everything (**Ctrl+A**) and **Group** it (**Ctrl+G**).
+2. Click the name at the top left (like *Brilliant Blorr*) and change it to your own name.
+3. Click **Export** (top right) → **.STL**.
+4. Give the file to your tutor.
+
+✅ **It worked if:** when you drag your hat, all parts move together, and the hat stays on the blue grid.
+
+Printing takes a while, so you'll probably get your hat at the next session.
 
 ---
 
