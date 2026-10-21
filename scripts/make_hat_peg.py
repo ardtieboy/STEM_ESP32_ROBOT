@@ -18,7 +18,7 @@ CIRCLE_D = 5.1 + 0.2
 ARM_LEN = 6.19
 ARM_W = 2.58
 FILLET = 0.5
-PEG_OUT = 5.0
+PEG_OUT = 4.0   # = how far pupils lift the dome (Ctrl+↑ x4); hole is 5.0 deep
 OVERLAP = 0.5
 SEGMENTS = 360
 
