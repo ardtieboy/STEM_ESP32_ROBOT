@@ -327,6 +327,7 @@ Then retry the upload.
 1. Try a different USB cable — many cables are charge-only and carry no data
 2. Try a different USB port on the laptop
 3. Press the reset button on the board and wait 3 seconds
+4. On a Mac: a board that has never been plugged in before brings up an **"Allow accessory to connect?"** pop-up, sometimes hidden behind other windows. Until you click **Allow**, the board doesn't show up at all
 
 ### MicroPython not responding (raw REPL error)
 
