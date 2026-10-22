@@ -23,6 +23,8 @@ if [ -z "$PORT" ]; then
   count=$(printf '%s' "$ports" | grep -c . || true)
   if [ "$count" != 1 ]; then
     echo "Expected exactly one ESP32 plugged in, found $count port(s): ${ports:-none}" >&2
+    [ "$count" = 0 ] && [ "$(uname)" = Darwin ] &&
+      echo "New board? Look for macOS's 'Allow accessory to connect?' pop-up and click Allow." >&2
     exit 1
   fi
   PORT=$ports

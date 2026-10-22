@@ -29,7 +29,7 @@ Pupil names are personal data about children. Never commit the names file or wri
 2. Run `scripts/provision_board.sh` from the repo root (timeout 300000 ms). Erase + flash takes about a minute.
 3. If the script prints `== OK`, ask the user to confirm the screen says "Hello, <NAME>!", then move on.
 4. If it fails, show the relevant error lines and the likely fix, then offer *Retry*, *Skip* or *Stop*:
-   - "found 0 port(s)": the cable is charge-only, or the board isn't plugged in. Mac: `ls /dev/cu.*`.
+   - "found 0 port(s)": on a Mac, first look for the "Allow accessory to connect?" pop-up. It appears for every board that was never plugged in before, can hide behind other windows, and until it's allowed the board doesn't show up on USB at all. Otherwise the cable is charge-only or the board isn't plugged in. Check with `ls /dev/cu.*` and `ioreg -p IOUSB -w0 | grep "+-o"`.
    - "found 2+ port(s)": unplug the other boards, or pass the port as the argument.
    - Failed to connect / timed out in esptool: hold the **BOOT** button while flashing starts, or try another cable or USB port.
    - `OLED NOT FOUND`: the display wiring or soldering on SDA 21 / SCL 22 is faulty. The board is flashed, but put it aside for repair.
