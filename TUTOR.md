@@ -84,6 +84,19 @@ git clone https://github.com/ardtieboy/STEM_ESP32_ROBOT.git ~/STEM_ESP32_ROBOT
 ```
 Before each workshop, delete the folder and clone again. This gets the latest exercises and removes leftovers from the last group (`git pull` would only update the branch that is checked out).
 
+### Check every student computer
+
+Log in as the pupil's user (not with sudo) and run:
+```bash
+~/STEM_ESP32_ROBOT/scripts/check_machine.sh
+```
+It checks Thonny (and that it is set to MicroPython (ESP32)), the `dialout` group, the USB serial drivers, `brltty` (on Ubuntu it can steal the board's USB port), the repo and its branches, a browser and that tinkercad.com loads. Plug in a provisioned board first and it also checks that the board answers. On its own it changes nothing and prints the fix for every ❌. The computer is ready when it ends with `== READY`. Close Thonny while it runs, or the board check reports the port as busy.
+
+**To set up a computer in one go**, add `--fix`. It asks for the sudo password, installs Thonny, git and Firefox where missing, removes `brltty`, adds the user to `dialout`, sets Thonny to MicroPython (ESP32) and clones the repo fresh into `~/STEM_ESP32_ROBOT` (deleting leftovers from the last group). Then it runs the check. Log out and back in afterwards for the `dialout` group, and run the check once more. On a computer without the repo, run it straight from GitHub:
+```bash
+curl -fsSL https://raw.githubusercontent.com/ardtieboy/STEM_ESP32_ROBOT/main/scripts/check_machine.sh | bash -s -- --fix
+```
+
 ### Thonny workflow for students (summarised)
 
 1. **View → Files** to show the file panel
