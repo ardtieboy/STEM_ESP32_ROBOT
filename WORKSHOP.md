@@ -287,6 +287,15 @@ MY_MELODY = [
 
 Durations: `0.2` = short · `0.4` = medium · `0.6` = long
 
+> ⚡ **Shortcut:** let the computer type the notes for you. Copy the address of the song page on noobnotes.net, open a terminal and run:
+>
+> ```bash
+> cd ~/STEM_ESP32_ROBOT
+> python3 scripts/noobnotes_to_melody.py https://noobnotes.net/do-re-mi-sound-of-music/
+> ```
+>
+> It prints the first 20 seconds of the song. Copy everything from `MY_MELODY = [` to `]` and paste it over the old `MY_MELODY` in main.py. The durations are a guess, so change them if your song sounds too fast or slow.
+
 > 💡 If a note doesn't play, look at the bottom panel in Thonny. It says `Unknown note:` and shows the note it didn't understand.
 
 ### Stuck?
