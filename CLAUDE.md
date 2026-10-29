@@ -40,7 +40,7 @@ robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 ```
 
 **Note notation (musical buzzer):** noobnotes.net's own notation, so pupils copy notes literally.
-`.C` = octave 3 (low), `C` = octave 4, `^C` = octave 5 (high), `*C` = octave 6 (very high), sharps `C#`, flats `Db` (aliases generated from the sharps), `_` = rest. Always capitals; noobnotes' `-` joiners are left out. `play()` prints `Unknown note:` instead of crashing on a typo.
+`.C` = octave 3 (low), `C` = octave 4, `^C` = octave 5 (high), `*C` = octave 6 (very high), sharps `C#`, flats `Db` (aliases generated from the sharps), `_` = rest. Always capitals; noobnotes' `-` joiners are left out. `play()` prints `Unknown note:` instead of crashing on a typo. `scripts/noobnotes_to_melody.py <url>` turns a noobnotes song page into a paste-ready `MY_MELODY` (durations guessed from `-` joiners and line ends, first 20 s only).
 
 **Non-blocking WiFi server pattern (wifi robot):**
 - `srv.setblocking(False)` — accept() raises OSError when idle, eyes keep animating
@@ -61,7 +61,7 @@ robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 | `wifi_robot_exercise` | Gaps: `WIFI_NAME` (default `'Robot-' + BOARD_ID`, unique per board via `unique_id()`, shown on the yellow strip), two `XXX` entries in MOODS dict |
 | `wifi_robot_solution` | Complete WiFi robot with mood control webpage |
 
-**Doc sync (automatic):** WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg, CLAUDE.md, hat_peg.stl and hat_example.jpg live on `main`. Only edit them on `main`. The `.githooks/post-commit` hook copies them to all six exercise/solution branches after each commit on `main`, adding a "Sync docs from main" commit where something changed. It uses git plumbing, so no checkout happens and the working tree is untouched.
+**Doc sync (automatic):** WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg, CLAUDE.md, hat_peg.stl, hat_example.jpg and scripts/noobnotes_to_melody.py live on `main`. Only edit them on `main`. The `.githooks/post-commit` hook copies them to all six exercise/solution branches after each commit on `main`, adding a "Sync docs from main" commit where something changed. It uses git plumbing, so no checkout happens and the working tree is untouched.
 - Enable once per clone: `git config core.hooksPath .githooks`
 - The hook does not push. Publish everything with `git push origin main robo_eyes_exercise robo_eyes_solution musical_buzzer_exercise musical_buzzer_solution wifi_robot_exercise wifi_robot_solution`
 - To add a synced file or branch, edit `FILES` / `BRANCHES` at the top of the hook.
