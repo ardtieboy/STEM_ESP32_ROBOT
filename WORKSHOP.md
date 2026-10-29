@@ -264,7 +264,31 @@ Save, restart, press **button 1** to hear your beep.
 
 Press **button 2**. A song plays. Can you guess what it is?
 
-Once you've heard it, replace the notes inside `MY_MELODY = [ ... ]` with your own song. Go to **[noobnotes.net](https://noobnotes.net)**, find a song, and copy the notes. For example, noobnotes shows Happy Birthday like this:
+Once you've heard it, replace it with your own song. A script on the computer turns a song from noobnotes.net into code for you:
+
+1. Go to **[noobnotes.net](https://noobnotes.net)**, find a song you like and copy the address of its page from the address bar.
+2. Open a terminal and run the script with that address, for example:
+
+   ```bash
+   cd ~/STEM_ESP32_ROBOT
+   python3 scripts/noobnotes_to_melody.py https://noobnotes.net/do-re-mi-sound-of-music/
+   ```
+
+3. It prints the first 20 seconds of the song, like this:
+
+   ```python
+   MY_MELODY = [
+       ('C',0.4),('D',0.4),('E',0.4),('C',0.4),('E',0.2),('C',0.2),('E',0.6),('_',0.2),  # Doe, a deer, a female deer
+       ...
+   ]
+   ```
+
+   Copy everything from `MY_MELODY = [` to `]`. In main.py, select the old `MY_MELODY = [ ... ]` and paste over it.
+4. Save, restart and press **button 2**. Does it sound like your song?
+
+The numbers are how long each note plays: `0.2` = short · `0.4` = medium · `0.6` = long. The script guesses them, so make some notes longer or shorter if the rhythm sounds wrong.
+
+**Want to try it by hand?** Each note is written exactly as noobnotes shows it. For example, noobnotes shows Happy Birthday like this:
 
 ```
 D - D   E  -  D   G   F#
@@ -284,17 +308,6 @@ MY_MELODY = [
     ('_', 0.2),    # pause
 ]
 ```
-
-Durations: `0.2` = short · `0.4` = medium · `0.6` = long
-
-> ⚡ **Shortcut:** let the computer type the notes for you. Copy the address of the song page on noobnotes.net, open a terminal and run:
->
-> ```bash
-> cd ~/STEM_ESP32_ROBOT
-> python3 scripts/noobnotes_to_melody.py https://noobnotes.net/do-re-mi-sound-of-music/
-> ```
->
-> It prints the first 20 seconds of the song. Copy everything from `MY_MELODY = [` to `]` and paste it over the old `MY_MELODY` in main.py. The durations are a guess, so change them if your song sounds too fast or slow.
 
 > 💡 If a note doesn't play, look at the bottom panel in Thonny. It says `Unknown note:` and shows the note it didn't understand.
 
