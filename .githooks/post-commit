@@ -6,7 +6,7 @@
 
 [ "$(git symbolic-ref --short -q HEAD)" = main ] || exit 0
 
-FILES="WORKSHOP.md TUTOR.md BOM.md button_diagram.svg CLAUDE.md hat_peg.stl hat_example.jpg"
+FILES="WORKSHOP.md TUTOR.md BOM.md button_diagram.svg CLAUDE.md hat_peg.stl hat_example.jpg scripts/noobnotes_to_melody.py"
 BRANCHES="robo_eyes_exercise robo_eyes_solution musical_buzzer_exercise musical_buzzer_solution wifi_robot_exercise wifi_robot_solution"
 
 tmp_index="$(git rev-parse --git-dir)/sync-docs-index"
