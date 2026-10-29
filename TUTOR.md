@@ -259,6 +259,8 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 - sharps `F#`, flats `Bb` (both work in every octave)
 - leave out the `-` that noobnotes puts between notes
 
+**Typing the notes is hard?** `scripts/noobnotes_to_melody.py <noobnotes URL>` (Python 3, no extra packages) fetches the song page and prints a ready-to-paste `MY_MELODY`, with the lyrics as comments. noobnotes has no rhythm, so durations are guessed: notes joined with `-` are short (0.2), others medium (0.4), the last note of a line long (0.6), then a pause. It prints only the first 20 seconds of the song (whole lines), so the melody stays short. Change `MAX_SECONDS` at the top of the script for more.
+
 **Common help requests:**
 
 - *"A note doesn't play"* — Thonny's bottom panel shows `Unknown note: ...`. Usually it's a lowercase letter (`^d` → `^D`) or a copied `-`.
