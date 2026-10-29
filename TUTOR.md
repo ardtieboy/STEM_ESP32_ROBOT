@@ -250,7 +250,7 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 
 ### Exercise 2 — Musical Buzzer
 
-**What students do:** (1) make the buttons work by replacing `pass` with `beep()` / `play_melody()`, (2) pick a beep note, (3) guess the mystery song (Let It Go), then write their own melody as a list of `('NOTE', duration)` tuples.
+**What students do:** (1) make the buttons work by replacing `pass` with `beep()` / `play_melody()`, (2) pick a beep note, (3) guess the mystery song (Let It Go), then replace it with their own song: they run `scripts/noobnotes_to_melody.py` with a noobnotes.net address and paste the `MY_MELODY` it prints. Quick pupils can write melodies by hand as a list of `('NOTE', duration)` tuples.
 
 **Key concept:** Sound is produced by toggling a pin at a specific frequency. Higher frequency = higher pitch.
 
