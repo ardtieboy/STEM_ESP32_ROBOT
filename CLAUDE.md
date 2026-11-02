@@ -61,10 +61,12 @@ robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 | `wifi_robot_exercise` | Gaps: `WIFI_NAME` (default `'Robot-' + BOARD_ID`, unique per board via `unique_id()`, shown on the yellow strip), two `XXX` entries in MOODS dict, Step 4 clock puzzle (pupils set `SECONDS_PER_MINUTE`/`SECONDS_PER_HOUR`, starting at 1; webpage form `/clock?h=&m=` pre-filled with the phone's time, counted on with `time.time()`, big HH:MM in the blue zone), optional bonus: paste own `MY_MELODY` from Exercise 2 (same note table, unknown notes print instead of crash) |
 | `wifi_robot_solution` | Complete WiFi robot with mood control webpage |
 
-**Doc sync (automatic):** WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg, CLAUDE.md, hat_peg.stl, hat_example.jpg and scripts/noobnotes_to_melody.py live on `main`. Only edit them on `main`. The `.githooks/post-commit` hook copies them to all six exercise/solution branches after each commit on `main`, adding a "Sync docs from main" commit where something changed. It uses git plumbing, so no checkout happens and the working tree is untouched.
+**Doc sync (automatic):** WORKSHOP.md, TUTOR.md, WORKSHOP_NL.md, TUTOR_NL.md, BOM.md, button_diagram.svg, CLAUDE.md, hat_peg.stl, hat_example.jpg and scripts/noobnotes_to_melody.py live on `main`. Only edit them on `main`. The `.githooks/post-commit` hook copies them to all six exercise/solution branches after each commit on `main`, adding a "Sync docs from main" commit where something changed. It uses git plumbing, so no checkout happens and the working tree is untouched.
 - Enable once per clone: `git config core.hooksPath .githooks`
 - The hook does not push. Publish everything with `git push origin main robo_eyes_exercise robo_eyes_solution musical_buzzer_exercise musical_buzzer_solution wifi_robot_exercise wifi_robot_solution`
 - To add a synced file or branch, edit `FILES` / `BRANCHES` at the top of the hook.
+
+**Dutch sheets:** pupils speak Dutch (Flanders). WORKSHOP_NL.md and TUTOR_NL.md are full translations of WORKSHOP.md and TUTOR.md. Whenever the English sheets change, make the same change in the Dutch ones. Code, code comments, Thonny menu items and webpage button labels stay in English (that is what pupils see on screen); code blocks and inline code are identical to the English sheets.
 
 ## Exercise structure decisions
 
