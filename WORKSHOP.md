@@ -373,6 +373,18 @@ Replace `XXX` with the correct emotion from Exercise 1.
 4. Open a browser. Tap the **address bar at the very top** (not a Google search box) and type exactly: **http://192.168.4.1**
 5. Tap the mood buttons and watch the eyes change!
 
+**Bonus step (optional) — Play your own song:**
+
+Right now **Play Song** plays Twinkle Twinkle Little Star. Make your robot play your song from Exercise 2 instead!
+
+1. Get your song's `MY_MELODY = [ ... ]` again. Run the script from Exercise 2 with your song's noobnotes.net address:
+   ```bash
+   cd ~/STEM_ESP32_ROBOT
+   python3 scripts/noobnotes_to_melody.py https://noobnotes.net/do-re-mi-sound-of-music/
+   ```
+2. In main.py, find `MY_MELODY = [` (just below the **BONUS** comment). Select everything from `MY_MELODY = [` to its `]` and paste your song over it.
+3. Save and restart. Connect to your robot's WiFi again and tap **Play Song**.
+
 ### Stuck?
 
 Your tutor can switch you to `wifi_robot_solution`.
