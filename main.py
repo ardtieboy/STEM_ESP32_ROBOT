@@ -235,6 +235,9 @@ while True:
             req = conn.recv(1024)
         except:
             req = b''
+        # Only keep the first line (GET /mood/happy HTTP/1.1). The lines
+        # after it can contain the address of the previous page.
+        req = req.split(b'\r\n')[0]
 
         if b'/clock?' in req:
             if set_clock(req):
