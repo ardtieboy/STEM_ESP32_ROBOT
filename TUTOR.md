@@ -270,7 +270,7 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 
 ### Exercise 3 — WiFi Robot
 
-**What students do:** Give the robot a WiFi name, fill in two missing moods, then control the eyes from a browser. Step 4: set `CLOCK_HOUR` / `CLOCK_MINUTE` to the current time and tap **Clock** on the webpage to show a big `HH:MM` clock instead of the eyes. The board has no internet and no battery-backed clock, so it simply counts on from the time in the code, starting when the code starts. Every restart begins at that time again. Optional bonus: paste their own `MY_MELODY` from Exercise 2 (or a fresh one from `scripts/noobnotes_to_melody.py`) over the Twinkle Twinkle melody, so **Play Song** plays their song. The WiFi code has the same note table as Exercise 2 and prints `Unknown note:` instead of crashing.
+**What students do:** Give the robot a WiFi name, fill in two missing moods, then control the eyes from a browser. Step 4: tap **Clock** on the webpage to show a big `HH:MM` clock instead of the eyes. The form next to it is pre-filled with the phone's time (pupils can change it). The board has no internet and no battery-backed clock, so it counts on from the time in the form. After a restart it forgets the time and shows the eyes again until the form is sent again. Optional bonus: paste their own `MY_MELODY` from Exercise 2 (or a fresh one from `scripts/noobnotes_to_melody.py`) over the Twinkle Twinkle melody, so **Play Song** plays their song. The WiFi code has the same note table as Exercise 2 and prints `Unknown note:` instead of crashing.
 
 **Key concept:** The ESP32 acts as a small web server. Any device on the same WiFi can send it requests.
 
@@ -286,7 +286,7 @@ The top 16 px of the screen are physically yellow; the bottom 48 px are blue. Th
 - *"The page won't load"* — Make sure the device is connected to the robot's WiFi, not the school network. Try disabling mobile data.
 - *"NameError: XXX"* — They left the `XXX` placeholder in the code without replacing it. Walk them through the two spots that need filling in.
 - *"The page loads but mood buttons do nothing"* — The `MOODS` dict may have a wrong emotion name. Check case and spelling.
-- *"The clock shows the wrong time"* — The time in the code is the time at the moment the code started, so after a restart it starts from there again. Set `CLOCK_HOUR` / `CLOCK_MINUTE` to the time now and restart. `CLOCK_HOUR` uses 24 hours: 2 pm is `14`.
+- *"The clock shows the wrong time"* — Send the form again with the right time. Hours use 24 hours: 2 pm is `14`. If the boxes are empty, the browser blocked the script that fills them in. Just type the time.
 - *"Play Song still plays Twinkle Twinkle"* (bonus) — They pasted the song somewhere else, or left the old `MY_MELODY` below the new one. There must be exactly one `MY_MELODY = [ ... ]`.
 - *"Pressing Play Song freezes the page"* — Normal behaviour — the board is playing the melody and can't accept requests during that time. The overlay should appear; the page resumes after the song.
 
