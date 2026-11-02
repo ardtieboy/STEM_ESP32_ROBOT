@@ -107,6 +107,31 @@ robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 robo.set_auto_blinker(ON, interval=2, variation=2)
 robo.set_idle_mode(ON, interval=2, variation=3)
 
+# --- Clock (set to the time when the code starts) ---
+CLOCK_HOUR   = 12
+CLOCK_MINUTE = 0
+clock_start = time.time()
+last_clock = ''
+digits = framebuf.FrameBuffer(bytearray(40), 40, 8, framebuf.MONO_VLSB)
+
+def show_clock():
+    # Draw HH:MM three times bigger than normal text in the blue zone
+    global last_clock
+    secs = CLOCK_HOUR * 3600 + CLOCK_MINUTE * 60 + time.time() - clock_start
+    colon = ':' if secs % 2 == 0 else ' '   # blinks every second
+    text = '{:02d}{}{:02d}'.format(secs // 3600 % 24, colon, secs // 60 % 60)
+    if text == last_clock:
+        return
+    last_clock = text
+    digits.fill(0)
+    digits.text(text, 0, 0)
+    blue_zone.fill(0)
+    for x in range(40):
+        for y in range(8):
+            if digits.pixel(x, y):
+                blue_zone.fill_rect(4 + x * 3, 12 + y * 3, 3, 3, 1)
+    on_show(None)
+
 # --- Web server (non-blocking so eyes keep animating) ---
 srv = socket.socket()
 srv.bind(('', 80))
@@ -131,6 +156,7 @@ PAGE = (
     '.tired{background:#6688aa;color:#fff}'
     '.angry{background:#dd3333;color:#fff}'
     '.curious{background:#33bbaa;color:#111}'
+    '.clock{background:#2c3e50;color:#fff;margin-top:20px}'
     '.beep{background:#9b59b6;color:#fff;margin-top:20px}'
     '.song{background:#e67e22;color:#fff;margin-top:8px}'
     '#overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;'
@@ -150,6 +176,7 @@ PAGE = (
     '<a href="/mood/tired"   class="tired   %%T%%">Tired</a>'
     '<a href="/mood/angry"   class="angry   %%A%%">Angry</a>'
     '<a href="/mood/curious" class="curious %%C%%">Curious</a>'
+    '<br><a href="/clock" class="clock %%K%%">Clock</a>'
     '<br><a href="/beep" class="beep" onclick="document.getElementById(\'overlay\').className=\'show\'">Beep!</a>'
     '<br><a href="/song" class="song" onclick="document.getElementById(\'overlay\').className=\'show\'">Play Song</a>'
     '</body></html>'
@@ -163,13 +190,17 @@ def send_page(conn, mood):
     page = page.replace('%%T%%', 'active' if mood == 'tired'   else '')
     page = page.replace('%%A%%', 'active' if mood == 'angry'   else '')
     page = page.replace('%%C%%', 'active' if mood == 'curious' else '')
+    page = page.replace('%%K%%', 'active' if mood == 'clock'   else '')
     conn.send(page.encode())
 
 do_beep = False
 do_song = False
 
 while True:
-    robo.update()
+    if current == 'clock':
+        show_clock()
+    else:
+        robo.update()
 
     if do_beep:
         beep()
@@ -194,6 +225,9 @@ while True:
             do_song = True
             conn.send(b'HTTP/1.0 302 Found\r\nLocation: /\r\n\r\n')
         else:
+            if b'/clock' in req:
+                current = 'clock'
+                last_clock = ''   # draw the clock straight away
             for mood in MOODS:
                 if ('/mood/' + mood).encode() in req:
                     current = mood
