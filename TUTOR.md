@@ -1,5 +1,7 @@
 # Tutor Guide — STEM MicroPython Workshop
 
+🇳🇱 Nederlandse versie: [TUTOR_NL.md](TUTOR_NL.md) (goes with the Dutch pupil handout [WORKSHOP_NL.md](WORKSHOP_NL.md))
+
 This guide gives you everything you need to support students, troubleshoot problems, and understand the technical background — even if you have not run this workshop before.
 
 ---
