@@ -58,7 +58,7 @@ robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 | `robo_eyes_solution` | Full solution: `PRESSED = 0`, `EMOTION_1 = HAPPY`, `EMOTION_2 = ANGRY` |
 | `musical_buzzer_exercise` | 3 tasks: wire up buttons (`pass` placeholders), change beep note, guess/replace mystery song |
 | `musical_buzzer_solution` | Full solution with Let It Go (Frozen) as default melody |
-| `wifi_robot_exercise` | Gaps: `WIFI_NAME` (default `'Robot-' + BOARD_ID`, unique per board via `unique_id()`, shown on the yellow strip), two `XXX` entries in MOODS dict, optional bonus: paste own `MY_MELODY` from Exercise 2 (same note table, unknown notes print instead of crash) |
+| `wifi_robot_exercise` | Gaps: `WIFI_NAME` (default `'Robot-' + BOARD_ID`, unique per board via `unique_id()`, shown on the yellow strip), two `XXX` entries in MOODS dict, Step 4 clock mode (`CLOCK_HOUR`/`CLOCK_MINUTE` typed in, counted on with `time.time()`, Clock button shows big HH:MM in the blue zone), optional bonus: paste own `MY_MELODY` from Exercise 2 (same note table, unknown notes print instead of crash) |
 | `wifi_robot_solution` | Complete WiFi robot with mood control webpage |
 
 **Doc sync (automatic):** WORKSHOP.md, TUTOR.md, BOM.md, button_diagram.svg, CLAUDE.md, hat_peg.stl, hat_example.jpg and scripts/noobnotes_to_melody.py live on `main`. Only edit them on `main`. The `.githooks/post-commit` hook copies them to all six exercise/solution branches after each commit on `main`, adding a "Sync docs from main" commit where something changed. It uses git plumbing, so no checkout happens and the working tree is untouched.
