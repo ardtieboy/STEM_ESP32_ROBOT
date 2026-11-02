@@ -62,9 +62,15 @@ def beep():
 # Press button 2 to hear it. Can you guess what it is?
 #
 # Once you know, replace MY_MELODY with your own song!
-# Go to noobnotes.net, find a song, and write the notes here,
-# exactly as noobnotes shows them: D  ^D  .B  F#
+#   1. Find a song on noobnotes.net and copy the page address
+#   2. In a terminal, run:
+#        cd ~/STEM_ESP32_ROBOT
+#        python3 scripts/noobnotes_to_melody.py <page address>
+#   3. Copy everything it prints, from MY_MELODY = [ to ],
+#      and paste it over the MY_MELODY below
 #
+# You can also write notes by hand, exactly as noobnotes
+# shows them: D  ^D  .B  F#
 #   ('C', 0.3)  ->  play a C for 0.3 seconds
 #   ('_', 0.2)  ->  silence / pause
 #   Durations:  0.2 = short   0.4 = medium   0.6 = long
