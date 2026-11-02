@@ -116,6 +116,10 @@ robo.set_auto_blinker(ON, interval=2, variation=2)
 robo.set_idle_mode(ON, interval=2, variation=3)
 
 # --- Clock (the time comes from the form on the webpage) ---
+# time.time() is whole seconds since 1 Jan 2000 00:00 (MicroPython's epoch
+# on the ESP32). The board doesn't know the real date: it starts near 0 at
+# power-up and keeps counting through resets. So only the difference
+# time.time() - clock_start is used: seconds since the form was sent.
 clock_secs = 0    # time of day in seconds, when the form was sent
 clock_start = time.time()
 last_clock = ''
@@ -137,6 +141,7 @@ def set_clock(req):
 def show_clock():
     # Draw HH:MM three times bigger than normal text in the blue zone
     global last_clock
+    # Seconds since midnight, e.g. 14:35 + 90 s = 52590 -> 14:36
     secs = clock_secs + time.time() - clock_start
     colon = ':' if secs % 2 == 0 else ' '   # blinks every second
     text = '{:02d}{}{:02d}'.format(secs // 3600 % 24, colon, secs // 60 % 60)
