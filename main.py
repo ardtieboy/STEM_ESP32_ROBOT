@@ -107,17 +107,29 @@ robo = RoboEyes(blue_zone, 128, 48, frame_rate=60, on_show=on_show)
 robo.set_auto_blinker(ON, interval=2, variation=2)
 robo.set_idle_mode(ON, interval=2, variation=3)
 
-# --- Clock (set to the time when the code starts) ---
-CLOCK_HOUR   = 12
-CLOCK_MINUTE = 0
+# --- Clock (the time comes from the form on the webpage) ---
+clock_secs = 0    # time of day in seconds, when the form was sent
 clock_start = time.time()
 last_clock = ''
 digits = framebuf.FrameBuffer(bytearray(40), 40, 8, framebuf.MONO_VLSB)
 
+def set_clock(req):
+    # req contains /clock?h=14&m=35 when the form is sent
+    global clock_secs, clock_start
+    try:
+        query = req.split(b' ')[1].split(b'?')[1].decode()
+        args = dict(p.split('=') for p in query.split('&'))
+        hour, minute = int(args['h']), int(args['m'])
+    except (IndexError, KeyError, ValueError):
+        return False
+    clock_secs = (hour % 24) * 3600 + (minute % 60) * 60
+    clock_start = time.time()
+    return True
+
 def show_clock():
     # Draw HH:MM three times bigger than normal text in the blue zone
     global last_clock
-    secs = CLOCK_HOUR * 3600 + CLOCK_MINUTE * 60 + time.time() - clock_start
+    secs = clock_secs + time.time() - clock_start
     colon = ':' if secs % 2 == 0 else ' '   # blinks every second
     text = '{:02d}{}{:02d}'.format(secs // 3600 % 24, colon, secs // 60 % 60)
     if text == last_clock:
@@ -148,7 +160,7 @@ PAGE = (
     'h1{font-size:28px;margin-bottom:4px}'
     '.build{font-size:11px;color:#444;margin-bottom:20px;font-family:monospace}'
     'p{color:#888;margin-bottom:24px}'
-    'a{display:inline-block;margin:6px;padding:14px 22px;border-radius:12px;'
+    'a,button{display:inline-block;border:0;margin:6px;padding:14px 22px;border-radius:12px;'
     'font-size:18px;font-weight:bold;text-decoration:none}'
     '.active{outline:3px solid #fff;outline-offset:3px}'
     '.neutral{background:#555;color:#fff}'
@@ -156,7 +168,9 @@ PAGE = (
     '.tired{background:#6688aa;color:#fff}'
     '.angry{background:#dd3333;color:#fff}'
     '.curious{background:#33bbaa;color:#111}'
-    '.clock{background:#2c3e50;color:#fff;margin-top:20px}'
+    'form{margin-top:20px}'
+    'input{width:64px;padding:12px;font-size:18px;border-radius:12px;border:0;text-align:center}'
+    '.clock{background:#2c3e50;color:#fff}'
     '.beep{background:#9b59b6;color:#fff;margin-top:20px}'
     '.song{background:#e67e22;color:#fff;margin-top:8px}'
     '#overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;'
@@ -176,7 +190,11 @@ PAGE = (
     '<a href="/mood/tired"   class="tired   %%T%%">Tired</a>'
     '<a href="/mood/angry"   class="angry   %%A%%">Angry</a>'
     '<a href="/mood/curious" class="curious %%C%%">Curious</a>'
-    '<br><a href="/clock" class="clock %%K%%">Clock</a>'
+    '<form action="/clock">'
+    '<input type="number" name="h" id="h" min="0" max="23" required> : '
+    '<input type="number" name="m" id="m" min="0" max="59" required>'
+    '<button class="clock %%K%%">Clock</button></form>'
+    '<script>var d=new Date();h.value=d.getHours();m.value=d.getMinutes()</script>'
     '<br><a href="/beep" class="beep" onclick="document.getElementById(\'overlay\').className=\'show\'">Beep!</a>'
     '<br><a href="/song" class="song" onclick="document.getElementById(\'overlay\').className=\'show\'">Play Song</a>'
     '</body></html>'
@@ -218,16 +236,18 @@ while True:
         except:
             req = b''
 
-        if b'/beep' in req:
+        if b'/clock?' in req:
+            if set_clock(req):
+                current = 'clock'
+                last_clock = ''   # draw the clock straight away
+            conn.send(b'HTTP/1.0 302 Found\r\nLocation: /\r\n\r\n')
+        elif b'/beep' in req:
             do_beep = True
             conn.send(b'HTTP/1.0 302 Found\r\nLocation: /\r\n\r\n')
         elif b'/song' in req:
             do_song = True
             conn.send(b'HTTP/1.0 302 Found\r\nLocation: /\r\n\r\n')
         else:
-            if b'/clock' in req:
-                current = 'clock'
-                last_clock = ''   # draw the clock straight away
             for mood in MOODS:
                 if ('/mood/' + mood).encode() in req:
                     current = mood
