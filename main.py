@@ -22,9 +22,27 @@ while not ap.active():
 buzzer = Pin(23, Pin.OUT, value=1)  # HIGH = silent (active-LOW)
 
 NOTES = {
-    'C':262,'D':294,'E':330,'F':349,'G':392,'A':440,'B':494,
-    '^C':523,'^D':587,'^E':659,'^F':698,'^G':784,'_':0,
+    # Low notes: noobnotes puts a dot in front (.C)
+    '.C': 131, '.C#': 139, '.D': 147, '.D#': 156, '.E': 165, '.F': 175,
+    '.F#': 185, '.G': 196, '.G#': 208, '.A': 220, '.A#': 233, '.B': 247,
+    # Middle notes: just the letter (C)
+    'C': 262, 'C#': 277, 'D': 294, 'D#': 311, 'E': 330, 'F': 349,
+    'F#': 370, 'G': 392, 'G#': 415, 'A': 440, 'A#': 466, 'B': 494,
+    # High notes: noobnotes puts ^ in front (^C)
+    '^C': 523, '^C#': 554, '^D': 587, '^D#': 622, '^E': 659, '^F': 698,
+    '^F#': 740, '^G': 784, '^G#': 831, '^A': 880, '^A#': 932, '^B': 988,
+    # Very high notes: noobnotes puts * in front (*C)
+    '*C': 1047, '*C#': 1109, '*D': 1175, '*D#': 1245, '*E': 1319, '*F': 1397,
+    '*F#': 1480, '*G': 1568, '*G#': 1661, '*A': 1760, '*A#': 1865, '*B': 1976,
+    '_': 0,    # rest (silence)
 }
+
+# Flats sound the same as the sharp just below: Db = C#, Eb = D#, ...
+FLATS = {'C#': 'Db', 'D#': 'Eb', 'F#': 'Gb', 'G#': 'Ab', 'A#': 'Bb'}
+for name in list(NOTES):
+    letter = name.lstrip('.^*')
+    if letter in FLATS:
+        NOTES[name[:len(name) - len(letter)] + FLATS[letter]] = NOTES[name]
 
 def _play_note(freq, duration):
     if freq == 0:
@@ -43,7 +61,7 @@ def _play_note(freq, duration):
 def beep(freq=880, duration=0.08):
     _play_note(freq, duration)
 
-MELODY = [
+MY_MELODY = [
     # Twinkle Twinkle Little Star
     ('C',.3),('C',.3),('G',.3),('G',.3),('A',.3),('A',.3),('G',.5),
     ('_', .1),
@@ -59,8 +77,11 @@ MELODY = [
 ]
 
 def play_song():
-    for note, dur in MELODY:
-        _play_note(NOTES[note], dur)
+    for note, dur in MY_MELODY:
+        if note in NOTES:
+            _play_note(NOTES[note], dur)
+        else:
+            print('Unknown note:', note, '(check capitals and . ^ * in front)')
     buzzer.value(1)
 
 # --- OLED Display ---
