@@ -373,13 +373,22 @@ Replace `XXX` with the correct emotion from Exercise 1.
 4. Open a browser. Tap the **address bar at the very top** (not a Google search box) and type exactly: **http://192.168.4.1**
 5. Tap the mood buttons and watch the eyes change!
 
-**Step 4 — Turn your robot into a clock:**
+**Step 4 — Teach your robot to tell the time:**
 
-Your robot can't know what time it is by itself, so you tell it from the webpage.
+Your robot can turn into a clock, but it only counts **seconds**. You have to teach it how long a minute and an hour are. Find these lines in main.py:
 
-1. On the webpage, find the two boxes next to the **Clock** button. Your phone has already filled in the time it is now: hours (0 to 23) and minutes.
-2. Check that it's right, change it if you like, and tap **Clock**. The eyes turn into a big clock!
-3. Tap a mood button to get the eyes back.
+```python
+SECONDS_PER_MINUTE = 1     # <-- change this!
+SECONDS_PER_HOUR   = 1     # <-- change this!
+```
+
+1. How many seconds are in one minute? And how many seconds are in one hour? Type your answers instead of the `1`s.
+2. Save and restart. Connect to your robot's WiFi again and open **http://192.168.4.1**.
+3. Next to the **Clock** button, your phone has already filled in the time it is now. Tap **Clock**. The eyes turn into a big clock!
+4. Is your clock right? Watch it for a minute. The minutes should go up once every minute, not every second.
+5. Tap a mood button to get the eyes back.
+
+> 💡 Does your clock race, or show a strange time? Look at your two numbers again. An hour has 60 minutes, and every minute has... how many seconds?
 
 > 💡 When the robot restarts, it forgets the time and shows its eyes again. Just tap **Clock** on the webpage again.
 
