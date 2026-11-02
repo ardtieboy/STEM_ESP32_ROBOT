@@ -1,5 +1,7 @@
 # STEM Club — MicroPython Workshop
 
+🇳🇱 Nederlandse versie: [WORKSHOP_NL.md](WORKSHOP_NL.md)
+
 ## Welcome!
 
 When you sit down, look at the screen on your board. It says **"Hello, <NAME>!"**. The board doesn't know your name yet. Your first job is to teach it!
