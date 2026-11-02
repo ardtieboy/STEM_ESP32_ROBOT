@@ -375,19 +375,13 @@ Replace `XXX` with the correct emotion from Exercise 1.
 
 **Step 4 — Turn your robot into a clock:**
 
-Your robot can't know what time it is by itself, so you tell it. Find these lines in main.py:
+Your robot can't know what time it is by itself, so you tell it from the webpage.
 
-```python
-CLOCK_HOUR   = 12    # <-- change this! (0 to 23)
-CLOCK_MINUTE = 0     # <-- change this! (0 to 59)
-```
+1. On the webpage, find the two boxes next to the **Clock** button. Your phone has already filled in the time it is now: hours (0 to 23) and minutes.
+2. Check that it's right, change it if you like, and tap **Clock**. The eyes turn into a big clock!
+3. Tap a mood button to get the eyes back.
 
-1. Look at the clock on the computer and type the time it is now. For 2:35 in the afternoon, type `14` and `35`.
-2. Save and restart. The robot starts counting from that time.
-3. Connect to your robot's WiFi again, open **http://192.168.4.1** and tap **Clock**. The eyes turn into a big clock!
-4. Tap a mood button to get the eyes back.
-
-> 💡 When the robot restarts, it starts counting from your time again. If the clock is wrong, change the numbers and restart.
+> 💡 When the robot restarts, it forgets the time and shows its eyes again. Just tap **Clock** on the webpage again.
 
 **Bonus step (optional) — Play your own song:**
 
